@@ -1,7 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ─── data ─── */
 const FEATURES = [
@@ -11,6 +14,22 @@ const FEATURES = [
 ];
 
 export default function Hero() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", date: "", time: "", topic: "" });
+  
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleBooking = (e) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Consultation Booking: ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\nDate: ${formData.date}\nTime: ${formData.time}\nTopic: ${formData.topic}`
+    );
+    window.location.href = `mailto:contact@leadforgrow.com?subject=${subject}&body=${body}`;
+    setIsModalOpen(false); 
+    setFormData({ name: "", email: "", date: "", time: "", topic: "" });
+  };
+
   /* laptop / scene refs */
   const sectionRef       = useRef(null);
   const laptopGroupRef   = useRef(null);
@@ -124,9 +143,39 @@ export default function Hero() {
         opacity: 0.22, duration: 1.5, repeat: -1, yoyo: true,
         ease: "sine.inOut", delay: 5.2,
       });
+
+      // --- Scroll Parallax for Laptop ---
+      gsap.to(laptopGroupRef.current, {
+        y: 100,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true
+        }
+      });
     }, sectionRef);
 
-    return () => ctx.revert();
+    /* ══ Mouse Parallax Effect ══ */
+    const handleMouseMove = (e) => {
+      const x = (e.clientX / window.innerWidth) - 0.5;
+      const y = (e.clientY / window.innerHeight) - 0.5;
+
+      gsap.to(laptopGroupRef.current, { 
+        xPercent: x * 5, 
+        yPercent: y * 5, 
+        duration: 3, 
+        ease: "power2.out" 
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      ctx.revert();
+    };
   }, []);
 
   const word1 = "ScaleDesk";
@@ -239,21 +288,11 @@ export default function Hero() {
             linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), 
             linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
           background-size:48px 48px;
-          mask-image:radial-gradient(ellipse 90% 90% at 50% 50%, black 10%, transparent 100%);
-          -webkit-mask-image:radial-gradient(ellipse 90% 90% at 50% 50%, black 10%, transparent 100%);
+          /* Fade to completely transparent at the very bottom so it blends with About section */
+          mask-image: radial-gradient(ellipse 100% 100% at 50% 30%, black 20%, transparent 95%);
+          -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 30%, black 20%, transparent 95%);
         }
-        .scene-ambient-left {
-          position:absolute; width:1000px; height:1000px; border-radius:50%; z-index:0;
-          background:radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 60%);
-          left:-300px; top:50%; transform:translateY(-50%); pointer-events:none;
-          animation:ambientPulse 10s ease-in-out infinite alternate;
-        }
-        .scene-ambient-right {
-          position:absolute; width:800px; height:800px; border-radius:50%; z-index:0;
-          background:radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 65%);
-          right:-200px; top:50%; transform:translateY(-50%); pointer-events:none;
-          animation:ambientPulse 8s ease-in-out infinite alternate-reverse;
-        }
+
 
         @media (max-width:767px) {
           .laptop-scene { display:none!important; }
@@ -273,21 +312,19 @@ export default function Hero() {
         className="hero-section"
         style={{
           width:"100%", height:"calc(100vh - 84px)", minHeight:"600px",
-          backgroundColor:"#0a0a0a", // deep black
+          backgroundColor:"#000000", // pure black
           position:"relative", overflow:"hidden",
           display:"flex", alignItems:"center",
         }}
       >
         {/* Full-width depth grid & glowing orbs */}
         <div className="scene-grid"/>
-        <div className="scene-ambient-left"/>
-        <div className="scene-ambient-right"/>
 
         {/* ════ LEFT — hero text (z:5) ════ */}
         <div
           className="hero-left"
           style={{
-            position:"absolute", left:"6vw", top:"48%",
+            position:"absolute", left:"6vw", top:"50%",
             transform:"translateY(-50%)", width:"55%", maxWidth:"800px", zIndex:5,
           }}
         >
@@ -315,8 +352,8 @@ export default function Hero() {
             ))}
           </div>
           <div ref={btnsRef} style={{ display:"flex", alignItems:"center", gap:"24px" }}>
-            <button className="btn-primary">Book a Free Consultation</button>
-            <button className="btn-ghost" style={{ paddingLeft: "8px" }}>View Our Work <span style={{fontSize:"16px", fontWeight:400}}>→</span></button>
+            <button className="btn-primary" onClick={() => setIsModalOpen(true)}>Book a Free Consultation</button>
+            <a href="#scene-1" className="btn-ghost" style={{ paddingLeft: "8px", textDecoration: "none" }}>View Our Work <span style={{fontSize:"16px", fontWeight:400}}>→</span></a>
           </div>
         </div>
 
@@ -389,6 +426,64 @@ export default function Hero() {
           </div>
         </div>
       </section>
+      
+      {/* BOOKING MODAL */}
+      {isModalOpen && (
+         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsModalOpen(false)} />
+            
+            {/* Modal Content */}
+            <div className="relative w-full max-w-md bg-[#0a0a0a] rounded-3xl p-8 border border-white/10 shadow-[0_0_80px_rgba(0,0,0,0.8)] animate-in fade-in zoom-in duration-200">
+               <button 
+                 onClick={() => setIsModalOpen(false)}
+                 className="absolute top-6 right-6 text-zinc-500 hover:text-white transition-colors"
+               >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+               </button>
+
+               <div className="mb-6 text-left">
+                  <h3 className="text-2xl font-bold text-white mb-2 leading-tight">Book a Consultation</h3>
+                  <p className="text-sm text-zinc-400 font-light">Schedule time with our experts to discuss your business scale and architecture.</p>
+               </div>
+
+               <form onSubmit={handleBooking} className="flex flex-col gap-4 text-white text-left">
+                  <div>
+                     <label className="text-[10px] text-zinc-500 font-medium mb-1 block uppercase tracking-wider">Full Name *</label>
+                     <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder-zinc-700 focus:outline-none focus:border-blue-500/50 transition-colors pointer-events-auto" placeholder="John Doe" />
+                  </div>
+                  <div>
+                     <label className="text-[10px] text-zinc-500 font-medium mb-1 block uppercase tracking-wider">Email Address *</label>
+                     <input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder-zinc-700 focus:outline-none focus:border-blue-500/50 transition-colors" placeholder="johndoe@company.com" />
+                  </div>
+                  <div className="flex gap-4">
+                     <div className="flex-1">
+                        <label className="text-[10px] text-zinc-500 font-medium mb-1 block uppercase tracking-wider">Date *</label>
+                        <input required type="date" name="date" value={formData.date} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500/50 transition-colors [color-scheme:dark]" />
+                     </div>
+                     <div className="flex-1">
+                        <label className="text-[10px] text-zinc-500 font-medium mb-1 block uppercase tracking-wider">Time *</label>
+                        <input required type="time" name="time" value={formData.time} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500/50 transition-colors [color-scheme:dark]" />
+                     </div>
+                  </div>
+                  <div>
+                     <label className="text-[10px] text-zinc-500 font-medium mb-1 block uppercase tracking-wider">Topic of Discussion *</label>
+                     <select required name="topic" value={formData.topic} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500/50 transition-colors">
+                        <option value="" disabled>Select a topic</option>
+                        <option value="Enterprise AI Solutions">Enterprise AI Solutions</option>
+                        <option value="Software Development">Software Development</option>
+                        <option value="Cloud Architecture">Cloud Architecture</option>
+                        <option value="General Consulting">General Consulting</option>
+                     </select>
+                  </div>
+
+                  <button type="submit" className="mt-2 w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-lg transition-colors shadow-lg">
+                    Schedule via Email
+                  </button>
+               </form>
+            </div>
+         </div>
+      )}
     </>
   );
 }
