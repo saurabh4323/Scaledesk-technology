@@ -32,7 +32,9 @@ export default function Hero() {
 
   /* laptop / scene refs */
   const sectionRef       = useRef(null);
+  const laptopScrollRef  = useRef(null);
   const laptopGroupRef   = useRef(null);
+  const laptopFloatRef   = useRef(null);
   const lidRef           = useRef(null);
   const screenGlowRef    = useRef(null);
   const logoCenterRef    = useRef(null);
@@ -135,17 +137,34 @@ export default function Hero() {
       );
 
       /* ══ PHASE 6 — Idle loops ══ */
-      gsap.to(laptopGroupRef.current, {
-        y: -15, duration: 2.2, repeat: -1, yoyo: true,
-        ease: "sine.inOut", delay: 5.8,
+      // Primary floating motion
+      gsap.to(laptopFloatRef.current, {
+        y: -18, 
+        duration: 3.5, 
+        repeat: -1, 
+        yoyo: true,
+        ease: "sine.inOut", 
+        delay: 5.8,
       });
+      
+      // Subtle 3D rotation for premium feel
+      gsap.to(laptopFloatRef.current, {
+        rotateX: -1.5,
+        rotateY: 1.5,
+        duration: 4.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 5.8,
+      });
+
       gsap.to(screenGlowRef.current, {
-        opacity: 0.22, duration: 1.5, repeat: -1, yoyo: true,
+        opacity: 0.22, duration: 2, repeat: -1, yoyo: true,
         ease: "sine.inOut", delay: 5.2,
       });
 
       // --- Scroll Parallax for Laptop ---
-      gsap.to(laptopGroupRef.current, {
+      gsap.to(laptopScrollRef.current, {
         y: 100,
         ease: "none",
         scrollTrigger: {
@@ -163,9 +182,9 @@ export default function Hero() {
       const y = (e.clientY / window.innerHeight) - 0.5;
 
       gsap.to(laptopGroupRef.current, { 
-        xPercent: x * 5, 
-        yPercent: y * 5, 
-        duration: 3, 
+        xPercent: x * 3, 
+        yPercent: y * 3, 
+        duration: 2.5, 
         ease: "power2.out" 
       });
     };
@@ -359,8 +378,10 @@ export default function Hero() {
 
         {/* ════ RIGHT — 3D laptop scene (z:10) ════ */}
         <div className="laptop-scene" style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center", perspective:"1600px", zIndex:10 }}>
-          <div ref={laptopGroupRef} className="laptop-group">
-            <div className="laptop-body">
+          <div ref={laptopScrollRef} style={{ transformStyle: "preserve-3d", willChange: "transform" }}>
+            <div ref={laptopGroupRef} className="laptop-group">
+              <div ref={laptopFloatRef} style={{ transformStyle: "preserve-3d", willChange: "transform" }}>
+                <div className="laptop-body">
 
               {/* ── LID ── */}
               <div ref={lidRef} className="laptop-lid">
@@ -422,6 +443,8 @@ export default function Hero() {
               {/* ── SIMPLE FRONT LIP BASE ── */}
               <div className="laptop-base" />
 
+                </div>
+              </div>
             </div>
           </div>
         </div>
