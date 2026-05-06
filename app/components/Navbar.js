@@ -29,23 +29,26 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { name: "What We Do", href: "/#services" },
-    { name: "What We Are", href: "/#about" },
-    { name: "What We Did", href: "/#case-studies" },
-    { name: "Career", href: "/careers" },
-    { name: "Contact", href: "/contact" },
+    { name: "Platform", href: "/#services" },
+    { name: "Case Studies", href: "/case-studies" },
+    { name: "Company", href: "/about" },
+    { name: "Insights", href: "/insights" },
+    { name: "Careers", href: "/careers" },
   ];
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full bg-black border-b border-[#1f1f1f]">
-        <div className="max-w-[1440px] w-full mx-auto px-6 xl:px-12 h-[80px] flex items-center justify-between">
+      <header className="sticky top-0 z-50 w-full bg-[#030303]/80 backdrop-blur-xl border-b border-white/5 transition-all duration-300">
+        <div className="max-w-[1440px] w-full mx-auto px-6 xl:px-12 h-[72px] flex items-center justify-between">
           {/* Brand */}
           <Link 
             href="/" 
-            className="text-white text-[20px] font-bold tracking-tight"
+            className="flex items-center gap-2 text-white text-[16px] font-semibold tracking-tight"
           >
-            ScaleDesk Technology
+            <div className="w-5 h-5 bg-white rounded-sm flex items-center justify-center">
+               <div className="w-2.5 h-2.5 bg-black rounded-sm" />
+            </div>
+            ScaleDesk
           </Link>
 
           {/* Desktop Nav */}
@@ -54,19 +57,17 @@ export default function Navbar() {
               <Link 
                 key={link.name} 
                 href={link.href}
-                className="group relative text-[#cccccc] hover:text-[#ffffff] text-[14px] font-medium tracking-[0.08em] uppercase py-2 transition-colors duration-300"
+                className="group relative text-[#a1a1aa] hover:text-white text-[13px] font-medium tracking-[0.02em] py-2 transition-colors duration-300"
               >
                 {link.name}
-                {/* Animated Underline */}
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-blue-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
               </Link>
             ))}
             
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="ml-6 px-7 py-3 border-[1.5px] border-blue-500 text-blue-500 text-[14px] font-medium tracking-tight uppercase hover:bg-blue-500 hover:text-white transition-colors duration-300"
+              className="ml-6 px-5 py-2.5 bg-white text-black text-[13px] font-medium tracking-tight rounded-md hover:bg-gray-200 transition-colors duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
             >
-              Book a Consultation
+              Contact Sales
             </button>
           </nav>
 
@@ -105,9 +106,9 @@ export default function Navbar() {
                     setIsOpen(false);
                     setIsModalOpen(true);
                   }}
-                  className="w-full flex justify-center px-7 py-3 border-[1.5px] border-blue-500 text-blue-500 text-[14px] font-medium tracking-tight uppercase hover:bg-blue-500 hover:text-white transition-colors"
+                  className="w-full flex justify-center px-5 py-2.5 bg-white text-black text-[13px] font-medium tracking-tight rounded-md hover:bg-gray-200 transition-colors"
                 >
-                  Book a Consultation
+                  Contact Sales
                 </button>
               </div>
             </div>

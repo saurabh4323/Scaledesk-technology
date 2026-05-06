@@ -563,7 +563,61 @@ export default function About() {
            </div>
         </div>
 
-       
+        {/* ════ SCENE 6: Leadership & Culture ════ */}
+        <div id="scene-6" className="py-16 md:py-32 w-full border-t border-white/5 relative mt-16">
+           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-600/5 to-transparent blur-[120px] pointer-events-none" />
+           <div className="mx-auto px-0">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                 
+                 <div className="lg:col-span-5 relative z-10">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.02] mb-6">
+                       <span className="w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                       <span className="text-white/70 text-[10px] font-bold uppercase tracking-widest mono-text">Leadership & Culture</span>
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-semibold text-white tracking-tight mb-8">
+                       Engineered by Builders. <br className="hidden md:block"/>
+                       <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a1a1aa] to-[#52525b]">For Builders.</span>
+                    </h2>
+                    <p className="text-lg text-[#888888] font-light leading-relaxed mb-8">
+                       We are a collective of elite software engineers, system architects, and technical operators. 
+                       We don't just write code; we take ownership of complex technical challenges and deliver solutions that redefine what's possible for our enterprise partners.
+                    </p>
+                    
+                    <div className="flex flex-col gap-6 border-l border-white/10 pl-6 mb-10">
+                       <div>
+                          <h4 className="text-white font-medium mb-1">Extreme Ownership</h4>
+                          <p className="text-sm text-[#666]">We take full accountability for the systems we design and deploy.</p>
+                       </div>
+                       <div>
+                          <h4 className="text-white font-medium mb-1">Engineering Excellence</h4>
+                          <p className="text-sm text-[#666]">We adhere to the highest standards of code quality and architecture.</p>
+                       </div>
+                    </div>
+                 </div>
+
+                 <div className="lg:col-span-7 relative z-10 flex gap-4 md:gap-6 h-[400px] md:h-[500px]">
+                    <div className="w-1/2 h-full rounded-2xl bg-[#0a0a0e] border border-white/5 overflow-hidden relative group translate-y-8">
+                       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700 grayscale mix-blend-luminosity"></div>
+                       <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/40 to-transparent"></div>
+                       <div className="absolute bottom-6 left-6 right-6">
+                          <h3 className="text-white text-lg font-medium">Collaborative Design</h3>
+                          <p className="text-[#888] text-sm mt-1">Cross-functional engineering pods.</p>
+                       </div>
+                    </div>
+                    <div className="w-1/2 h-full rounded-2xl bg-[#0a0a0e] border border-white/5 overflow-hidden relative group">
+                       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700 grayscale mix-blend-luminosity"></div>
+                       <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/40 to-transparent"></div>
+                       <div className="absolute bottom-6 left-6 right-6">
+                          <h3 className="text-white text-lg font-medium">Deep Focus</h3>
+                          <p className="text-[#888] text-sm mt-1">Solving hard technical problems.</p>
+                       </div>
+                    </div>
+                 </div>
+                 
+              </div>
+           </div>
+        </div>
+
       </div>
     </section>
   );

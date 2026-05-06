@@ -1,217 +1,240 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+function SoftwareEngineeringDiagram() {
+  return (
+    <div className="w-full h-full relative flex items-center justify-center">
+       <svg viewBox="0 0 400 300" className="w-full h-full">
+          {/* Client -> Load Balancer -> Microservices */}
+          <rect x="50" y="120" width="40" height="60" rx="4" fill="#111" stroke="#3b82f6" strokeWidth="2" />
+          <text x="70" y="155" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">Web</text>
+
+          <path d="M 90 150 L 150 150" stroke="#333" strokeWidth="2" strokeDasharray="4 4" />
+          <circle cx="150" cy="150" r="4" fill="#3b82f6" className="animate-pulse" />
+
+          <rect x="170" y="110" width="60" height="80" rx="8" fill="#111" stroke="#6366f1" strokeWidth="2" />
+          <text x="200" y="145" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">API</text>
+          <text x="200" y="160" fill="#666" fontSize="8" textAnchor="middle" className="mono-text">Gateway</text>
+
+          <path d="M 230 150 L 290 100" stroke="#333" strokeWidth="2" />
+          <path d="M 230 150 L 290 150" stroke="#333" strokeWidth="2" />
+          <path d="M 230 150 L 290 200" stroke="#333" strokeWidth="2" />
+
+          <rect x="290" y="80" width="60" height="40" rx="4" fill="#111" stroke="#22c55e" strokeWidth="2" />
+          <text x="320" y="105" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">Auth</text>
+
+          <rect x="290" y="130" width="60" height="40" rx="4" fill="#111" stroke="#22c55e" strokeWidth="2" />
+          <text x="320" y="155" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">Core</text>
+
+          <rect x="290" y="180" width="60" height="40" rx="4" fill="#111" stroke="#22c55e" strokeWidth="2" />
+          <text x="320" y="205" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">Billing</text>
+       </svg>
+    </div>
+  );
+}
+
+function CloudInfrastructureDiagram() {
+  return (
+    <div className="w-full h-full relative flex items-center justify-center">
+       <svg viewBox="0 0 400 300" className="w-full h-full">
+          {/* Kubernetes Cluster */}
+          <rect x="40" y="40" width="320" height="220" rx="12" fill="transparent" stroke="#3b82f6" strokeWidth="1" strokeDasharray="6 6" />
+          <text x="200" y="60" fill="#3b82f6" fontSize="12" textAnchor="middle" className="mono-text font-bold tracking-widest">KUBERNETES CLUSTER (us-east-1)</text>
+
+          <rect x="60" y="80" width="120" height="150" rx="6" fill="#111" stroke="#444" strokeWidth="1" />
+          <text x="120" y="100" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">Node Pool A</text>
+          <rect x="75" y="115" width="90" height="30" rx="4" fill="#222" stroke="#22c55e" strokeWidth="1" />
+          <rect x="75" y="155" width="90" height="30" rx="4" fill="#222" stroke="#22c55e" strokeWidth="1" />
+          <rect x="75" y="195" width="90" height="30" rx="4" fill="#222" stroke="#22c55e" strokeWidth="1" />
+
+          <rect x="220" y="80" width="120" height="150" rx="6" fill="#111" stroke="#444" strokeWidth="1" />
+          <text x="280" y="100" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">Node Pool B</text>
+          <rect x="235" y="115" width="90" height="30" rx="4" fill="#222" stroke="#22c55e" strokeWidth="1" />
+          <rect x="235" y="155" width="90" height="30" rx="4" fill="#222" stroke="#22c55e" strokeWidth="1" />
+          <rect x="235" y="195" width="90" height="30" rx="4" fill="#222" stroke="#fbbf24" strokeWidth="1" />
+          <text x="280" y="215" fill="#fbbf24" fontSize="8" textAnchor="middle" className="mono-text animate-pulse">SCALING...</text>
+       </svg>
+    </div>
+  );
+}
+
+function DataPipelinesDiagram() {
+  return (
+    <div className="w-full h-full relative flex items-center justify-center">
+       <svg viewBox="0 0 400 300" className="w-full h-full">
+          {/* Events -> Kafka -> Spark -> Snowflake */}
+          <circle cx="50" cy="150" r="20" fill="#111" stroke="#3b82f6" strokeWidth="2" />
+          <text x="50" y="153" fill="#fff" fontSize="8" textAnchor="middle" className="mono-text">Events</text>
+
+          <path d="M 70 150 L 130 150" stroke="#333" strokeWidth="2" />
+          <circle cx="100" cy="150" r="3" fill="#3b82f6" className="animate-ping" />
+
+          <rect x="130" y="110" width="60" height="80" rx="6" fill="#111" stroke="#a855f7" strokeWidth="2" />
+          <text x="160" y="145" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">Kafka</text>
+          <text x="160" y="160" fill="#666" fontSize="8" textAnchor="middle" className="mono-text">Stream</text>
+
+          <path d="M 190 150 L 250 150" stroke="#333" strokeWidth="2" />
+
+          <rect x="250" y="120" width="50" height="60" rx="6" fill="#111" stroke="#f97316" strokeWidth="2" />
+          <text x="275" y="145" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">Spark</text>
+          <text x="275" y="160" fill="#666" fontSize="8" textAnchor="middle" className="mono-text">Process</text>
+
+          <path d="M 300 150 L 340 150" stroke="#333" strokeWidth="2" />
+
+          <path d="M 340 130 Q 360 120 380 130 L 380 170 Q 360 180 340 170 Z" fill="#111" stroke="#06b6d4" strokeWidth="2" />
+          <text x="360" y="153" fill="#fff" fontSize="8" textAnchor="middle" className="mono-text">DW</text>
+       </svg>
+    </div>
+  );
+}
+
+function AIDiagram() {
+  return (
+    <div className="w-full h-full relative flex items-center justify-center">
+       <svg viewBox="0 0 400 300" className="w-full h-full">
+          {/* User -> LLM Router -> Vector DB / Models */}
+          <rect x="30" y="130" width="50" height="40" rx="4" fill="#111" stroke="#64748b" strokeWidth="2" />
+          <text x="55" y="153" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">Input</text>
+
+          <path d="M 80 150 L 140 150" stroke="#333" strokeWidth="2" />
+
+          <rect x="140" y="110" width="80" height="80" rx="40" fill="#111" stroke="#ec4899" strokeWidth="2" />
+          <text x="180" y="145" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">Agent</text>
+          <text x="180" y="160" fill="#ec4899" fontSize="8" textAnchor="middle" className="mono-text font-bold">ROUTER</text>
+
+          <path d="M 220 130 L 270 90" stroke="#333" strokeWidth="2" strokeDasharray="4 4" />
+          <path d="M 220 150 L 280 150" stroke="#333" strokeWidth="2" />
+          <path d="M 220 170 L 270 210" stroke="#333" strokeWidth="2" strokeDasharray="4 4" />
+
+          <rect x="270" y="60" width="80" height="50" rx="6" fill="#111" stroke="#14b8a6" strokeWidth="2" />
+          <text x="310" y="85" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">Vector DB</text>
+          <text x="310" y="100" fill="#666" fontSize="8" textAnchor="middle" className="mono-text">Context</text>
+
+          <rect x="280" y="130" width="80" height="40" rx="6" fill="#111" stroke="#f43f5e" strokeWidth="2" />
+          <text x="320" y="155" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">GPT-4</text>
+
+          <rect x="270" y="190" width="80" height="50" rx="6" fill="#111" stroke="#eab308" strokeWidth="2" />
+          <text x="310" y="215" fill="#fff" fontSize="10" textAnchor="middle" className="mono-text">Internal API</text>
+          <text x="310" y="230" fill="#666" fontSize="8" textAnchor="middle" className="mono-text">Action</text>
+       </svg>
+    </div>
+  );
+}
 
 const SERVICES = [
-  { id: 1, title: 'Platform Engineering', desc: 'Scalable, production-grade digital systems', group: 'left', y: '100px' },
-  { id: 2, title: 'Product Development', desc: 'End-to-end digital product delivery', group: 'left', y: '350px' },
-  { id: 3, title: 'Intelligent Automation', desc: 'Enterprise workflow & process automation', group: 'left', y: '600px' },
-  { id: 4, title: 'Venture Acceleration', desc: 'Rapid build cycles from zero to market', group: 'right', y: '100px' },
-  { id: 5, title: 'Cloud Infrastructure', desc: 'High-availability distributed architecture', group: 'right', y: '350px' },
-  { id: 6, title: 'Engineering Advisory', desc: 'Strategic architecture & technology consulting', group: 'right', y: '600px' }
+  {
+    id: "software-engineering",
+    title: "Software Engineering",
+    desc: "Build scalable, high-performance applications using modern frameworks and robust distributed architectures.",
+    tags: ["React/Next.js", "Node.js", "Go", "Rust"],
+    href: "/services/software-engineering",
+    diagram: <SoftwareEngineeringDiagram />
+  },
+  {
+    id: "cloud-infrastructure",
+    title: "Cloud Infrastructure",
+    desc: "Deploy highly available, fault-tolerant infrastructure on AWS or GCP with infrastructure-as-code.",
+    tags: ["Kubernetes", "Terraform", "Docker", "AWS"],
+    href: "/services/cloud-infrastructure",
+    diagram: <CloudInfrastructureDiagram />
+  },
+  {
+    id: "data-pipelines",
+    title: "Data Pipelines",
+    desc: "Process billions of events in real-time with reliable, scalable data streaming and warehousing solutions.",
+    tags: ["Kafka", "Spark", "Snowflake", "dbt"],
+    href: "/services/data-pipelines",
+    diagram: <DataPipelinesDiagram />
+  },
+  {
+    id: "ai-automation",
+    title: "AI Orchestration",
+    desc: "Integrate large language models and autonomous agents securely into your enterprise workflows.",
+    tags: ["OpenAI", "LangChain", "Vector DBs", "PyTorch"],
+    href: "/services/ai-automation",
+    diagram: <AIDiagram />
+  }
 ];
 
 export default function Services() {
-  const containerRef = useRef(null);
-  const [hoveredCard, setHoveredCard] = useState(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    
-    let ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-         scrollTrigger: {
-            trigger: ".services-trigger",
-            start: "top 75%",
-         }
-      });
-
-      // 1. Core Ignite
-      tl.fromTo(".svc-engine", 
-         { scale: 0, opacity: 0 },
-         { scale: 1, opacity: 1, duration: 1.2, ease: "back.out(1.5)" }
-      );
-
-      // 2. SVG Lines draw
-      const lines = gsap.utils.toArray(".svc-line");
-      tl.to(lines, { strokeDashoffset: 0, duration: 1.5, ease: "power2.out", stagger: 0.15 }, "-=0.2");
-
-      // 3. Cards reveal
-      tl.fromTo(".svc-card", 
-         { x: (i, el) => el.classList.contains('left-card') ? 30 : -30, opacity: 0 },
-         { x: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out" },
-         "-=1.2"
-      );
-
-      // Removed endless idle animations (particles, ring spins, pulses, floating) to maintain a static, premium gradient aesthetic.
-    }, containerRef);
-    
-    // Depth Parallax Tracking
-    const handleMouseMove = (e) => {
-      if (window.innerWidth < 1024) return;
-      const x = (e.clientX / window.innerWidth) - 0.5;
-      const y = (e.clientY / window.innerHeight) - 0.5;
-      
-      gsap.to(".svc-parallax-group", { 
-         rotateY: x * 15, 
-         rotateX: -y * 15, 
-         duration: 2, 
-         ease: "power2.out" 
-      });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      ctx.revert();
-    };
-  }, []);
-
-  const getPath = (id) => {
-     switch(id) {
-         case 1: return "M620,400 C500,400 500,150 360,150";
-         case 2: return "M620,400 L360,400";
-         case 3: return "M620,400 C500,400 500,650 360,650";
-         case 4: return "M620,400 C740,400 740,150 880,150";
-         case 5: return "M620,400 L880,400";
-         case 6: return "M620,400 C740,400 740,650 880,650";
-         default: return "";
-     }
-  };
+  const [activeTab, setActiveTab] = useState(SERVICES[0].id);
+  const activeService = SERVICES.find(s => s.id === activeTab);
 
   return (
-    <section id="services" ref={containerRef} className="relative w-full py-5 overflow-hidden services-trigger">
-       
-      {/* Subtle Background Ambience */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-        <div className="absolute inset-0 opacity-[0.015]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-blue-600/10 blur-[150px] pointer-events-none" />
+    <section id="services" className="relative w-full py-32 overflow-hidden bg-[#030303] border-b border-white/5">
+      {/* Background Ambience */}
+      <div className="absolute inset-0 z-0 pointer-events-none flex justify-center">
+         <div className="w-[1000px] h-[500px] bg-blue-600/5 blur-[120px] rounded-[100%] mt-32" />
       </div>
 
-      <div className="max-w-[1240px] mx-auto px-6 relative z-10 flex flex-col items-center">
-        
-        {/* Header Block */}
-        <div className="text-center mb-24 relative">
+      <div className="max-w-[1440px] mx-auto px-6 xl:px-12 relative z-10">
+        <div className="mb-20">
           <h2 className="text-4xl md:text-5xl font-semibold text-white tracking-tight mb-6">
-            Engineering Services <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">for Scale</span>
+            Enterprise Capabilities
           </h2>
-          <p className="text-lg text-zinc-400 font-light mx-auto max-w-2xl">
-            From MVP to enterprise infrastructure — we design, build, and scale mission-critical systems.
+          <p className="text-lg text-[#888888] font-light max-w-2xl">
+            From architecture to deployment — we engineer mission-critical systems that scale securely.
           </p>
-          <div className="mt-8 mx-auto w-24 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent shadow-[0_0_15px_rgba(59,130,246,0.6)]" />
         </div>
 
-        {/* Desktop System Visualization (Hidden on Mobile) */}
-        <div className="hidden lg:block relative w-full h-[700px] mb-0" style={{ perspective: '1200px' }}>
-            <div className="svc-parallax-group w-full h-full relative" style={{ transformStyle: 'preserve-3d' }}>
-            {/* SVG Wire Mesh Layer */}
-            <svg viewBox="0 0 1240 700" className="absolute inset-0 pointer-events-none">
-                <defs>
-                   <linearGradient id="lineGlowLeft" x1="1" y1="0" x2="0" y2="0">
-                       <stop offset="0%" stopColor="rgba(59,130,246,0.5)" />
-                       <stop offset="100%" stopColor="rgba(59,130,246,0.1)" />
-                   </linearGradient>
-                   <linearGradient id="lineGlowRight" x1="0" y1="0" x2="1" y2="0">
-                       <stop offset="0%" stopColor="rgba(59,130,246,0.5)" />
-                       <stop offset="100%" stopColor="rgba(59,130,246,0.1)" />
-                   </linearGradient>
-                </defs>
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+           {/* Left: Service List */}
+           <div className="w-full lg:w-5/12 flex flex-col gap-2">
+              {SERVICES.map((service) => {
+                 const isActive = activeTab === service.id;
+                 return (
+                    <div 
+                       key={service.id}
+                       onClick={() => setActiveTab(service.id)}
+                       className={`p-6 rounded-2xl cursor-pointer transition-all duration-300 border ${isActive ? 'bg-white/[0.03] border-white/10 shadow-lg' : 'border-transparent hover:bg-white/[0.01]'}`}
+                    >
+                       <h3 className={`text-xl font-semibold mb-3 tracking-tight ${isActive ? 'text-white' : 'text-[#888888]'}`}>
+                          {service.title}
+                       </h3>
+                       <p className={`text-[15px] font-light leading-relaxed mb-6 ${isActive ? 'text-[#a1a1aa]' : 'text-[#666666]'}`}>
+                          {service.desc}
+                       </p>
+                       <div className={`flex flex-wrap gap-2 mb-6 ${isActive ? 'opacity-100' : 'opacity-30'}`}>
+                          {service.tags.map(tag => (
+                             <span key={tag} className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[#a1a1aa] text-[10px] mono-text uppercase tracking-wider">
+                                {tag}
+                             </span>
+                          ))}
+                       </div>
+                       {isActive && (
+                          <Link href={service.href} className="inline-flex items-center gap-2 text-blue-400 text-[13px] font-medium hover:text-blue-300 transition-colors">
+                             Explore Architecture <span className="text-[16px]">→</span>
+                          </Link>
+                       )}
+                    </div>
+                 )
+              })}
+           </div>
 
-                {SERVICES.map((s) => (
-                    <g key={`wire-${s.id}`}>
-                        {/* Static Base Path Gradient */}
-                        <path 
-                           d={getPath(s.id)} 
-                           className="svc-line transition-all duration-500"
-                           stroke={hoveredCard === s.id ? "rgba(96,165,250,0.8)" : "rgba(59,130,246,0.3)"} 
-                           strokeWidth={hoveredCard === s.id ? "2.5" : "1.5"}
-                           fill="none" 
-                           strokeDasharray="1000"
-                           strokeDashoffset="1000"
-                           style={{ filter: hoveredCard === s.id ? 'drop-shadow(0px 0px 8px rgba(96,165,250,0.6))' : 'none' }}
-                        />
-                    </g>
-                ))}
-            </svg>
-
-            {/* Central Node: ScaleDesk Engine */}
-            <div className="svc-engine absolute top-[400px] left-[620px] -translate-x-1/2 -translate-y-1/2 w-40 h-40 flex items-center justify-center pointer-events-auto group">
-               <div className="absolute inset-2 rounded-full border border-blue-500/20 bg-gradient-to-tr from-blue-900/10 to-transparent" />
-               <div className="absolute inset-6 rounded-full border border-blue-400/30 bg-gradient-to-bl from-blue-800/10 to-transparent" />
-               
-               <div className="w-16 h-16 bg-[#0B0F1A] border border-blue-500/40 rounded-full shadow-[0_0_30px_rgba(59,130,246,0.3)] flex items-center justify-center backdrop-blur-md group-hover:shadow-[0_0_50px_rgba(96,165,250,0.6)] transition-all duration-500">
-                   <div className="w-4 h-4 bg-white rounded-full shadow-[0_0_15px_rgba(255,255,255,1)]" />
-               </div>
-               
-               <div className="absolute -bottom-8 whitespace-nowrap text-xs font-semibold text-blue-400 tracking-widest uppercase">ScaleDesk Engine</div>
-            </div>
-
-            {/* Floating Service Cards */}
-            {SERVICES.map((s) => (
-                <div 
-                   key={s.id}
-                   onMouseEnter={() => setHoveredCard(s.id)}
-                   onMouseLeave={() => setHoveredCard(null)}
-                   className={`absolute w-[300px] h-[100px] -translate-y-1/2 pointer-events-auto ${s.group === 'left' ? 'left-[30px]' : 'left-[910px]'}`}
-                   style={{ top: s.y }}
-                >
-                   <div className={`svc-card ${s.group}-card w-full h-full bg-[#0d121f]/90 backdrop-blur-xl border border-white/5 rounded-2xl p-5 shadow-[0_15px_40px_rgba(0,0,0,0.6)] cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:bg-[#111827]/95 hover:border-white/20 hover:shadow-[0_20px_50px_rgba(59,130,246,0.25)] flex items-center gap-4 relative overflow-hidden group`}>
-                      
-                      {/* Connection Anchor Dot */}
-                      <div className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-blue-500/50 transition-all duration-300 ${hoveredCard === s.id ? 'bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,1)] scale-150' : ''} ${s.group === 'left' ? '-right-1' : '-left-1'}`} />
-
-                      {/* Internal Hover Sweep */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0 -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none" />
-                      
-                      {/* Abstract Icon Block */}
-                      <div className="shrink-0 w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex flex-wrap items-center justify-center gap-1 p-2.5 group-hover:bg-blue-500/20 group-hover:border-blue-500/40 transition-colors duration-300">
-                         {/* Very minimal geometric abstract icon based on ID */}
-                         {s.id % 2 === 0 ? (
-                             <div className="w-full h-[3px] bg-blue-400/80 rounded-sm" />
-                         ) : (
-                             <div className="w-2.5 h-2.5 bg-indigo-400/80 rounded-sm" />
-                         )}
-                         {s.id % 3 === 0 && <div className="w-2.5 h-2.5 bg-blue-300/80 rounded-full" />}
-                         {s.id === 5 && <div className="w-full h-[3px] bg-indigo-400/80 rounded-sm mt-1" />}
-                         {s.id === 1 && <div className="w-2.5 h-2.5 bg-cyan-400/80 rounded-sm" />}
-                      </div>
-
-                      <div className="flex flex-col relative z-10">
-                         <h3 className="text-white font-medium text-base mb-1 group-hover:text-blue-200 transition-colors">{s.title}</h3>
-                         <p className="text-zinc-500 text-xs font-light leading-tight">{s.desc}</p>
-                      </div>
-                   </div>
-                </div>
-            ))}
-            </div>
-        </div>
-
-        {/* Mobile Linear Fallback (Shows below large devices) */}
-        <div className="lg:hidden flex flex-col gap-6 relative z-10 mb-12">
-            <div className="w-full flex justify-center py-8">
-               <div className="w-24 h-24 relative flex items-center justify-center">
-                  <div className="absolute inset-0 rounded-full border-t border-l border-blue-400/80 animate-spin" />
-                  <div className="w-10 h-10 bg-[#0B0F1A] border border-blue-500/50 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.6)]">
-                      <div className="w-3 h-3 bg-white rounded-full" />
-                  </div>
-               </div>
-            </div>
-            {SERVICES.map((s) => (
-                <div key={s.id} className="w-full bg-[#0d121f]/90 border border-white/5 rounded-2xl p-5 shadow-lg flex items-center gap-4 hover:border-blue-500/30 transition-colors">
-                     <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex flex-wrap items-center justify-center gap-1 p-2">
-                         <div className="w-2 h-2 bg-blue-400 rounded-sm" />
-                         <div className="w-2 h-2 bg-indigo-400 rounded-full" />
-                     </div>
-                     <div>
-                         <h3 className="text-white font-medium text-[15px] mb-1">{s.title}</h3>
-                         <p className="text-zinc-500 text-xs">{s.desc}</p>
-                     </div>
-                </div>
-            ))}
+           {/* Right: Architecture Diagram Panel */}
+           <div className="w-full lg:w-7/12 relative">
+              <div className="sticky top-32 w-full aspect-square md:aspect-[4/3] glass-panel rounded-3xl overflow-hidden flex flex-col">
+                 <div className="w-full h-12 bg-white/[0.02] border-b border-white/5 flex items-center px-6 gap-2 shrink-0">
+                    <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                    <div className="ml-4 text-[#666] text-[10px] mono-text tracking-widest uppercase">System_Architecture.viz</div>
+                 </div>
+                 
+                 <div className="flex-1 bg-[#050505] relative w-full h-full">
+                    {/* Grid Background */}
+                    <div className="absolute inset-0 bg-grid-white opacity-20" />
+                    
+                    {/* Key corresponding diagram */}
+                    <div key={activeTab} className="absolute inset-0 animate-in fade-in zoom-in-95 duration-500 ease-out">
+                       {activeService.diagram}
+                    </div>
+                 </div>
+              </div>
+           </div>
         </div>
       </div>
     </section>

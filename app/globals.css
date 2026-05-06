@@ -6,12 +6,12 @@ html {
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #111111;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #020202;
+    --background: #030303; /* Deeper, more absolute dark */
     --foreground: #ededed;
   }
 }
@@ -30,8 +30,19 @@ html {
   .glass-dark {
     @apply bg-black/40 backdrop-blur-2xl border border-white/5;
   }
+  .glass-panel {
+    @apply bg-[#0c0c0c]/80 backdrop-blur-md border border-white/5 shadow-2xl;
+  }
   .animate-glow {
     animation: glow 4s ease-in-out infinite;
+  }
+  .bg-grid-white {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  }
+  .mono-text {
+    font-family: var(--font-jetbrains-mono), monospace;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -44,4 +55,6 @@ body {
   background: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
