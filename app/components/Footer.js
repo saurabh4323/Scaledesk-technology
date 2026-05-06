@@ -10,9 +10,11 @@ export default function Footer() {
                <p className="text-zinc-500 font-light max-w-xs mb-8">
                  We build, scale, and protect enterprise infrastructure. Your dedicated long-term engineering partner.
                </p>
-               <button className="px-6 py-2.5 border border-white/20 text-white rounded-full hover:bg-white hover:text-black transition-colors font-medium text-xs">
-                  Contact Us
-               </button>
+               <Link href="/contact" className="inline-block">
+                 <button className="px-6 py-2.5 border border-white/20 text-white rounded-full hover:bg-white hover:text-black transition-colors font-medium text-xs cursor-pointer">
+                    Contact Us
+                 </button>
+               </Link>
             </div>
             
             <div className="flex flex-col gap-5 text-zinc-400 font-light">

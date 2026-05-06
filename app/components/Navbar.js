@@ -33,6 +33,7 @@ export default function Navbar() {
     { name: "What We Are", href: "/#about" },
     { name: "What We Did", href: "/#case-studies" },
     { name: "Career", href: "/careers" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
