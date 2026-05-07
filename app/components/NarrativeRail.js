@@ -6,6 +6,7 @@ const BEATS = [
   { id: "story-hero", label: "Signal" },
   { id: "story-trust", label: "Trust" },
   { id: "story-orchestration", label: "Orchestrate" },
+  { id: "story-capabilities", label: "Scale" },
   { id: "about", label: "Transform" },
   { id: "services", label: "Build" },
   { id: "story-product", label: "Protect" },

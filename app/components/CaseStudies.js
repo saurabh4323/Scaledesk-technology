@@ -26,12 +26,12 @@ export default function CaseStudies() {
        <div className="max-w-[1240px] mx-auto px-6">
           <div className="mb-20 flex flex-col md:flex-row justify-between items-end gap-8">
              <div>
-               <h5 className="text-[11px] uppercase tracking-widest text-zinc-500 font-semibold mb-4">Case Studies</h5>
-               <h2 className="text-4xl md:text-5xl font-semibold text-white tracking-tight leading-tight max-w-2xl">
+               <h5 className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-medium mb-4">Case Studies</h5>
+               <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white tracking-tight leading-tight max-w-2xl">
                  Real-world engineering.<br/>Measured impact.
                </h2>
              </div>
-             <button className="text-white border-b border-white pb-1 group hover:text-zinc-400 hover:border-zinc-400 transition-colors font-medium">
+             <button className="text-white text-sm border-b border-white/20 pb-1 group hover:text-zinc-400 hover:border-zinc-400 transition-colors font-medium">
                 View All Work
              </button>
           </div>
@@ -40,10 +40,10 @@ export default function CaseStudies() {
              {CASES.map((item, idx) => (
                 <div key={idx} className="case-impact-card group flex flex-col h-full border-t border-white/10 pt-8 cursor-pointer" style={{ "--case-index": idx }}>
                    <div className="case-impact-glow" />
-                   <div className="text-5xl md:text-6xl font-light text-white mb-2 tracking-tighter group-hover:text-zinc-400 transition-colors">{item.metric}</div>
-                   <div className="text-[11px] uppercase tracking-widest text-zinc-500 font-semibold mb-8">{item.metricLabel}</div>
-                   <h3 className="text-2xl font-semibold text-white mb-4 leading-snug group-hover:text-zinc-100">{item.title}</h3>
-                   <p className="text-zinc-400 font-light leading-relaxed">{item.desc}</p>
+                   <div className="text-4xl md:text-5xl font-light text-white mb-2 tracking-tighter group-hover:text-blue-400 transition-colors">{item.metric}</div>
+                   <div className="text-[10px] uppercase tracking-[0.1em] text-zinc-500 font-medium mb-8">{item.metricLabel}</div>
+                   <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 leading-snug group-hover:text-zinc-100">{item.title}</h3>
+                   <p className="text-zinc-400 font-light text-[15px] leading-relaxed">{item.desc}</p>
                 </div>
              ))}
           </div>

@@ -1,6 +1,7 @@
 import Hero from "./components/Hero";
 import TrustIndicators from "./components/TrustIndicators";
 import Showcase from "./components/Showcase";
+import StickyScrollStorytelling from "./components/StickyScrollStorytelling";
 import About from "./components/About";
 import Services from "./components/Service";
 import ProductLeadForGrow from "./components/ProductLeadForGrow";
@@ -15,8 +16,9 @@ export default function Home() {
       <Hero />
       <TrustIndicators />
       <Showcase />
+      <StickyScrollStorytelling />
       <About />
-      <Services />
+      {/* <Services /> */}
       <ProductLeadForGrow />
       <CaseStudies />
       <Footer />

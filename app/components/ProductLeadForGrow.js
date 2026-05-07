@@ -6,13 +6,13 @@ export default function ProductLeadForGrow() {
       <div className="max-w-[1240px] mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center gap-16">
          {/* Left Side: Text */}
          <div className="w-full md:w-1/2">
-            <h5 className="text-[11px] uppercase tracking-widest text-zinc-500 font-semibold mb-6">Our Businesses</h5>
-            <h2 className="text-4xl md:text-5xl font-semibold text-white tracking-tight leading-[1.1] mb-6">
+            <h5 className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-medium mb-5">Our Ecosystem</h5>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white tracking-tight leading-[1.2] mb-6">
               LeadForGrow:<br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 to-zinc-500 drop-shadow-sm">AI Revenue Protection.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-500">AI Revenue Protection.</span>
             </h2>
-            <p className="text-lg text-zinc-400 font-light leading-relaxed mb-10 max-w-lg">
-              We don't just build systems; we build intelligence. LeadForGrow is our advanced CRM and revenue protection platform, engineered natively to monitor, protect, and scale your financial operations with predictive AI.
+            <p className="text-base md:text-lg text-zinc-400 font-light leading-relaxed mb-10 max-w-lg">
+              We don't just build systems; we build intelligence. LeadForGrow is our advanced revenue protection platform, engineered natively to monitor, protect, and scale your financial operations with predictive AI.
             </p>
             
             <div className="flex flex-col gap-6">
