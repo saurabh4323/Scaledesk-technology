@@ -79,7 +79,7 @@ export default function Footer() {
          {/* Bottom Bar */}
          <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-[12px] text-[#666666] font-light">
             <div className="flex items-center gap-4">
-               <p>© {new Date().getFullYear()} ScaleDesk Technology. All rights reserved.</p>
+               <p>Copyright {new Date().getFullYear()} ScaleDesk Technology. All rights reserved.</p>
                <span className="hidden md:inline-block w-1 h-1 bg-[#333] rounded-full"></span>
                <p className="hidden md:block">Engineered in India. Deployed Globally.</p>
             </div>

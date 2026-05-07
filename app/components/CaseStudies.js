@@ -21,7 +21,8 @@ export default function CaseStudies() {
   ];
 
   return (
-    <section id="case-studies" className="w-full py-32">
+    <section id="story-proof" className="story-band w-full py-32 relative overflow-hidden">
+       <div className="story-beam story-beam-left" />
        <div className="max-w-[1240px] mx-auto px-6">
           <div className="mb-20 flex flex-col md:flex-row justify-between items-end gap-8">
              <div>
@@ -37,7 +38,8 @@ export default function CaseStudies() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
              {CASES.map((item, idx) => (
-                <div key={idx} className="group flex flex-col h-full border-t border-white/10 pt-8 cursor-pointer">
+                <div key={idx} className="case-impact-card group flex flex-col h-full border-t border-white/10 pt-8 cursor-pointer" style={{ "--case-index": idx }}>
+                   <div className="case-impact-glow" />
                    <div className="text-5xl md:text-6xl font-light text-white mb-2 tracking-tighter group-hover:text-zinc-400 transition-colors">{item.metric}</div>
                    <div className="text-[11px] uppercase tracking-widest text-zinc-500 font-semibold mb-8">{item.metricLabel}</div>
                    <h3 className="text-2xl font-semibold text-white mb-4 leading-snug group-hover:text-zinc-100">{item.title}</h3>

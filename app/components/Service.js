@@ -176,7 +176,7 @@ export default function Services() {
             Enterprise Capabilities
           </h2>
           <p className="text-lg text-[#888888] font-light max-w-2xl">
-            From architecture to deployment — we engineer mission-critical systems that scale securely.
+            From architecture to deployment, we engineer mission-critical systems that scale securely.
           </p>
         </div>
 
@@ -206,7 +206,7 @@ export default function Services() {
                        </div>
                        {isActive && (
                           <Link href={service.href} className="inline-flex items-center gap-2 text-blue-400 text-[13px] font-medium hover:text-blue-300 transition-colors">
-                             Explore Architecture <span className="text-[16px]">→</span>
+                             Explore Architecture <span className="text-[16px]">-&gt;</span>
                           </Link>
                        )}
                     </div>

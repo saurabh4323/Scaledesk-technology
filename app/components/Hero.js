@@ -205,8 +205,21 @@ export default function Hero() {
       <style>{`
         @keyframes blink       { 0%,100%{opacity:1} 50%{opacity:0.15} }
         @keyframes ambientPulse{
-          from{opacity:.4;transform:scale(1)}
-          to  {opacity:.8;transform:scale(1.15)}
+          from{opacity:.3;transform:scale(1)}
+          to  {opacity:.65;transform:scale(1.12)}
+        }
+        @keyframes heroScan {
+          0%   { left:-10%; opacity:0; }
+          5%   { opacity:1; }
+          95%  { opacity:1; }
+          100% { left:110%; opacity:0; }
+        }
+        .hero-scan-line {
+          position:absolute; top:0; bottom:0; width:1px;
+          background:linear-gradient(to bottom,transparent,rgba(99,102,241,0.25),transparent);
+          animation: heroScan 10s ease-in-out infinite;
+          animation-delay: 3s;
+          pointer-events:none; z-index:4;
         }
         
         /* ─── Buttons & UI elements ─── */
@@ -327,17 +340,53 @@ export default function Hero() {
 
       {/* ══════════ SECTION ══════════ */}
       <section
+        id="story-hero"
         ref={sectionRef}
         className="hero-section"
         style={{
           width:"100%", height:"calc(100vh - 84px)", minHeight:"600px",
-          backgroundColor:"#000000", // pure black
+          backgroundColor:"#000000",
           position:"relative", overflow:"hidden",
           display:"flex", alignItems:"center",
         }}
       >
-        {/* Full-width depth grid & glowing orbs */}
+        {/* Depth grid */}
         <div className="scene-grid"/>
+
+        {/* ── Cinematic Ambient Orbs ── */}
+        {/* Left orb — deep indigo */}
+        <div style={{
+          position:"absolute", top:"30%", left:"-8%",
+          width:"500px", height:"500px", borderRadius:"50%",
+          background:"radial-gradient(circle, rgba(79,70,229,0.07) 0%, transparent 70%)",
+          filter:"blur(40px)", pointerEvents:"none", zIndex:1,
+          animation:"ambientPulse 8s ease-in-out infinite alternate"
+        }}/>
+        {/* Right orb — deep blue */}
+        <div style={{
+          position:"absolute", top:"10%", right:"-5%",
+          width:"600px", height:"600px", borderRadius:"50%",
+          background:"radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 68%)",
+          filter:"blur(60px)", pointerEvents:"none", zIndex:1,
+          animation:"ambientPulse 11s ease-in-out infinite alternate-reverse"
+        }}/>
+        {/* Bottom orb — section connector warmth */}
+        <div style={{
+          position:"absolute", bottom:"-10%", left:"40%",
+          width:"400px", height:"200px", borderRadius:"50%",
+          background:"radial-gradient(circle, rgba(99,102,241,0.04) 0%, transparent 70%)",
+          filter:"blur(80px)", pointerEvents:"none", zIndex:1,
+        }}/>
+
+        {/* ── Scan line ── */}
+        <div className="hero-scan-line"/>
+
+        {/* ── Noise overlay for dimensional black ── */}
+        <div style={{
+          position:"absolute", inset:0, zIndex:2, pointerEvents:"none",
+          backgroundImage:`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E")`,
+          opacity:0.5,
+        }}/>
 
         {/* ════ LEFT — hero text (z:5) ════ */}
         <div
@@ -360,7 +409,7 @@ export default function Hero() {
             <span style={{color:"#fff"}}> Your Business.</span>
           </div>
           <p ref={subRef} style={{ fontSize:"16px", color:"#A1A1AA", lineHeight:1.8, maxWidth:"620px", fontWeight:300, margin:"0 0 36px" }}>
-            ScaleDesk operates as your dedicated engineering partner—allowing you to build, deploy, and scale enterprise products without the overhead of hiring an in-house team. We seamlessly integrate world-class software development, AI automation, and robust scalable infrastructure directly into your operational workflow. Shift your focus back to vision and strategy, while we engineer the foundation for your growth.
+            ScaleDesk operates as your dedicated engineering partner, allowing you to build, deploy, and scale enterprise products without the overhead of hiring an in-house team. We seamlessly integrate world-class software development, AI automation, and robust scalable infrastructure directly into your operational workflow. Shift your focus back to vision and strategy, while we engineer the foundation for your growth.
           </p>
           <div ref={featsRef} style={{ display:"flex", flexWrap:"wrap", gap:"10px", marginBottom:"36px" }}>
             {FEATURES.map(f => (
@@ -371,8 +420,8 @@ export default function Hero() {
             ))}
           </div>
           <div ref={btnsRef} style={{ display:"flex", alignItems:"center", gap:"24px" }}>
-            <button className="btn-primary" onClick={() => setIsModalOpen(true)}>Book a Free Consultation</button>
-            <a href="#scene-1" className="btn-ghost" style={{ paddingLeft: "8px", textDecoration: "none" }}>View Our Work <span style={{fontSize:"16px", fontWeight:400}}>→</span></a>
+            <button className="btn-primary-glow" onClick={() => setIsModalOpen(true)}>Book a Free Consultation</button>
+            <a href="#scene-1" className="btn-ghost-line" style={{ paddingLeft: "8px", textDecoration: "none" }}>View Our Work <span style={{fontSize:"16px", fontWeight:400}}>-&gt;</span></a>
           </div>
         </div>
 
@@ -448,6 +497,13 @@ export default function Hero() {
             </div>
           </div>
         </div>
+
+        {/* ── Section-to-section continuity fade ── */}
+        <div style={{
+          position:"absolute", bottom:0, left:0, right:0,
+          height:"180px", pointerEvents:"none", zIndex:8,
+          background:"linear-gradient(to bottom, transparent, #030303)"
+        }}/>
       </section>
       
       {/* BOOKING MODAL */}

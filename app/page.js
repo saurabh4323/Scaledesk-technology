@@ -6,10 +6,12 @@ import Services from "./components/Service";
 import ProductLeadForGrow from "./components/ProductLeadForGrow";
 import CaseStudies from "./components/CaseStudies";
 import Footer from "./components/Footer";
+import NarrativeRail from "./components/NarrativeRail";
 
 export default function Home() {
   return (
-    <main className="bg-[#030303] min-h-screen pb-0 flex flex-col">
+    <main className="site-flow bg-[#030303] min-h-screen pb-0 flex flex-col">
+      <NarrativeRail />
       <Hero />
       <TrustIndicators />
       <Showcase />

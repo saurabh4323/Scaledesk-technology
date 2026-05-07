@@ -2,10 +2,11 @@
 
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial } from '@react-three/drei';
+import { Points, PointMaterial, Line } from '@react-three/drei';
 
 function ParticleNetwork() {
   const ref = useRef();
+  const ringRef = useRef();
   
   // Generate random points in a sphere
   const sphere = useMemo(() => {
@@ -30,7 +31,18 @@ function ParticleNetwork() {
       ref.current.rotation.x -= delta / 15;
       ref.current.rotation.y -= delta / 20;
     }
+    if (ringRef.current) {
+      ringRef.current.rotation.z += delta / 8;
+      ringRef.current.rotation.y += delta / 18;
+    }
   });
+
+  const orbit = useMemo(() => {
+    return Array.from({ length: 96 }, (_, i) => {
+      const angle = (i / 95) * Math.PI * 2;
+      return [Math.cos(angle) * 2.05, Math.sin(angle) * 0.72, Math.sin(angle) * 0.18];
+    });
+  }, []);
 
   return (
     <group rotation={[0, 0, Math.PI / 6]}>
@@ -44,13 +56,22 @@ function ParticleNetwork() {
           opacity={0.6}
         />
       </Points>
+      <group ref={ringRef}>
+        <Line points={orbit} color="#60a5fa" lineWidth={0.6} transparent opacity={0.18} />
+      </group>
     </group>
   );
 }
 
 export default function Showcase() {
   return (
-    <section className="relative w-full h-[900px] bg-[#030303] overflow-hidden flex items-center justify-center border-b border-white/5">
+    <section id="story-orchestration" className="story-band relative w-full h-[900px] bg-[#030303] overflow-hidden flex items-center justify-center border-b border-white/5">
+      <div className="story-beam story-beam-center" />
+      <div className="data-stream-layer" aria-hidden="true">
+        {[...Array(7)].map((_, i) => (
+          <span key={i} style={{ "--stream-index": i }} />
+        ))}
+      </div>
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 3.5] }}>
           <ambientLight intensity={0.5} />
@@ -74,17 +95,17 @@ export default function Showcase() {
          </p>
          
          <div className="flex flex-wrap gap-6 justify-center pointer-events-auto">
-            <div className="flex flex-col items-center p-8 glass-panel rounded-2xl min-w-[200px] border-t border-white/10 relative overflow-hidden group">
+            <div className="metric-card-flow flex flex-col items-center p-8 glass-panel rounded-2xl min-w-[200px] border-t border-white/10 relative overflow-hidden group">
                <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                <div className="text-4xl font-bold text-white mb-2 tracking-tighter">99.999%</div>
                <div className="text-[#666] text-[11px] uppercase tracking-widest font-bold mono-text">Uptime SLA</div>
             </div>
-            <div className="flex flex-col items-center p-8 glass-panel rounded-2xl min-w-[200px] border-t border-white/10 relative overflow-hidden group">
+            <div className="metric-card-flow flex flex-col items-center p-8 glass-panel rounded-2xl min-w-[200px] border-t border-white/10 relative overflow-hidden group">
                <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                <div className="text-4xl font-bold text-white mb-2 tracking-tighter">&lt;12ms</div>
                <div className="text-[#666] text-[11px] uppercase tracking-widest font-bold mono-text">Global Latency</div>
             </div>
-            <div className="flex flex-col items-center p-8 glass-panel rounded-2xl min-w-[200px] border-t border-white/10 relative overflow-hidden group">
+            <div className="metric-card-flow flex flex-col items-center p-8 glass-panel rounded-2xl min-w-[200px] border-t border-white/10 relative overflow-hidden group">
                <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                <div className="text-4xl font-bold text-white mb-2 tracking-tighter">10B+</div>
                <div className="text-[#666] text-[11px] uppercase tracking-widest font-bold mono-text">Events/Day</div>
