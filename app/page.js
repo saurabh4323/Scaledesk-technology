@@ -1,26 +1,28 @@
 import Hero from "./components/Hero";
 import TrustIndicators from "./components/TrustIndicators";
-import Showcase from "./components/Showcase";
-import StickyScrollStorytelling from "./components/StickyScrollStorytelling";
-import About from "./components/About";
-import Services from "./components/Service";
-import ProductLeadForGrow from "./components/ProductLeadForGrow";
-import CaseStudies from "./components/CaseStudies";
+import ProductEngineeringIntro from "./components/home/ProductEngineeringIntro";
+import InsightGrid from "./components/home/InsightGrid";
+import EngineeringCapabilities from "./components/home/EngineeringCapabilities";
+import PlatformsSection from "./components/home/PlatformsSection";
+import WhyScaleDesk from "./components/home/WhyScaleDesk";
+import EngineeringProcess from "./components/home/EngineeringProcess";
+import IndustriesSection from "./components/home/IndustriesSection";
+import FinalCTA from "./components/home/FinalCTA";
 import Footer from "./components/Footer";
-import NarrativeRail from "./components/NarrativeRail";
 
 export default function Home() {
   return (
-    <main className="site-flow bg-[#030303] min-h-screen pb-0 flex flex-col">
-      <NarrativeRail />
+    <main className="site-flow min-h-screen pb-0 flex flex-col bg-black">
       <Hero />
       <TrustIndicators />
-      <Showcase />
-      <StickyScrollStorytelling />
-      <About />
-      {/* <Services /> */}
-      <ProductLeadForGrow />
-      <CaseStudies />
+      <ProductEngineeringIntro />
+      <InsightGrid />
+      <EngineeringCapabilities />
+      <PlatformsSection />
+      <WhyScaleDesk />
+      <EngineeringProcess />
+      <IndustriesSection />
+      <FinalCTA />
       <Footer />
     </main>
   );

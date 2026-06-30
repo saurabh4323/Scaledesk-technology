@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import BrandLogo from "./BrandLogo";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -98,7 +99,7 @@ export default function Navbar() {
       `}</style>
 
       <header
-        className={`navbar-enter sticky top-0 z-50 w-full transition-all duration-500 ${
+        className={`navbar-enter sticky top-0 z-50 w-full overflow-visible transition-all duration-500 ${
           scrolled
             ? "bg-[#030303]/90 backdrop-blur-2xl border-b border-white/[0.05] shadow-[0_1px_0_rgba(0,0,0,0.8),0_4px_40px_rgba(0,0,0,0.5)]"
             : "bg-transparent border-b border-transparent"
@@ -117,15 +118,9 @@ export default function Navbar() {
           {/* ── Brand ── */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 text-white text-[15px] font-semibold tracking-tight group"
+            className="flex items-center group shrink-0 overflow-visible"
           >
-            <div
-              className="w-6 h-6 rounded-[5px] flex items-center justify-center transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
-              style={{ background: "linear-gradient(135deg, #ffffff 0%, #d4d4d8 100%)" }}
-            >
-              <div className="w-3 h-3 bg-[#030303] rounded-[3px]" />
-            </div>
-            <span className="tracking-[-0.01em]">ScaleDesk</span>
+            <BrandLogo variant="navbar" />
           </Link>
 
           {/* ── Desktop Nav ── */}

@@ -212,14 +212,17 @@ export default function About() {
             });
          });
 
-         // ════ SCENE 6: Trust Layer ════
-         gsap.fromTo(".trust-logo",
-            { opacity: 0, y: 15 },
-            {
-               opacity: 0.3, y: 0, duration: 0.8, stagger: 0.1, ease: "power2.out",
-               scrollTrigger: { trigger: "#scene-6", start: "top 90%" }
-            }
-         );
+         // ════ SCENE 6: Trust Layer (only if logos exist in DOM) ════
+         const trustLogos = gsap.utils.toArray(".trust-logo");
+         if (trustLogos.length > 0) {
+            gsap.fromTo(trustLogos,
+               { opacity: 0, y: 15 },
+               {
+                  opacity: 0.3, y: 0, duration: 0.8, stagger: 0.1, ease: "power2.out",
+                  scrollTrigger: { trigger: "#scene-6", start: "top 90%" }
+               }
+            );
+         }
 
          // --- Background Scroll Parallax ---
          gsap.to(".parallax-bg-text", {
