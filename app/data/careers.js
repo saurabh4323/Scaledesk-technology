@@ -194,6 +194,10 @@ export const TECH_STACK = [
   "Datadog",
 ];
 
+export function getJobById(jobId) {
+  return OPPORTUNITIES.find((job) => job.id === jobId) ?? null;
+}
+
 export const OPPORTUNITIES = [
   {
     id: "SDT-ENG-001",
