@@ -8,10 +8,10 @@ import BrandLogo from "./BrandLogo";
 const BLUE = "#2F80FF";
 
 const NAV_LINKS = [
-  { name: "Platform", href: "/#services" },
+  // { name: "Services", href: "/services" },
+  { name: "Products", href: "/products" },
   { name: "Case Studies", href: "/case-studies" },
   { name: "Insights", href: "/insights" },
-  { name: "Careers", href: "/careers" },
   { name: "Company", href: "/about" },
 ];
 
