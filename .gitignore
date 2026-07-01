@@ -43,3 +43,4 @@ next-env.d.ts
 # application data (resumes + local fallback store)
 /data/uploads/
 /data/applications.json
+/data/applicants.json

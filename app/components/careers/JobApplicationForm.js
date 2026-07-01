@@ -15,6 +15,8 @@ const INITIAL_FORM = {
   collegeName: "",
   cgpa: "",
   whyJoinUs: "",
+  password: "",
+  confirmPassword: "",
 };
 
 function FormSection({ title, description, children }) {
@@ -54,6 +56,7 @@ export default function JobApplicationForm({ job }) {
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [applicationId, setApplicationId] = useState("");
+  const [accountEmail, setAccountEmail] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -74,7 +77,10 @@ export default function JobApplicationForm({ job }) {
       const body = new FormData();
       body.append("jobId", job.id);
       body.append("jobTitle", job.title);
-      Object.entries(formData).forEach(([key, value]) => body.append(key, value));
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key !== "confirmPassword") body.append(key, value);
+      });
+      body.append("confirmPassword", formData.confirmPassword);
       if (resume) body.append("resume", resume);
 
       const response = await fetch("/api/careers/apply", {
@@ -88,6 +94,7 @@ export default function JobApplicationForm({ job }) {
       }
 
       setApplicationId(data.applicationId);
+      setAccountEmail(formData.email);
       setSubmitted(true);
       setFormData(INITIAL_FORM);
       setResume(null);
@@ -113,23 +120,41 @@ export default function JobApplicationForm({ job }) {
           application and get back to you if your profile is a match.
         </p>
         {applicationId ? (
-          <p className="text-xs text-zinc-400 mb-8">Reference: {applicationId}</p>
+          <p className="text-xs text-zinc-400 mb-4">Reference: {applicationId}</p>
         ) : (
-          <div className="mb-8" />
+          <div className="mb-4" />
         )}
+        <div className="max-w-md mx-auto mb-8 border border-zinc-200 bg-zinc-50 p-5 text-left text-sm text-zinc-600 leading-relaxed">
+          <p className="font-semibold text-zinc-900 mb-2">Your tracking account is ready</p>
+          <p>
+            Sign in anytime at{" "}
+            <Link href="/careers/track" className="text-[#2F80FF] font-medium hover:underline">
+              Track Application
+            </Link>{" "}
+            using:
+          </p>
+          <ul className="mt-3 space-y-1 text-zinc-700">
+            <li>
+              <span className="text-zinc-500">Email:</span> {accountEmail}
+            </li>
+            <li>
+              <span className="text-zinc-500">Password:</span> the password you just set
+            </li>
+          </ul>
+        </div>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
-            href="/careers/opportunities"
+            href="/careers/track"
             className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white"
             style={{ backgroundColor: BLUE }}
           >
-            View other roles
+            Track my application
           </Link>
           <Link
-            href="/careers"
+            href="/careers/opportunities"
             className="inline-flex items-center justify-center border border-zinc-200 px-6 py-3 text-sm font-semibold text-zinc-700 hover:border-zinc-400 transition-colors"
           >
-            Back to careers
+            View other roles
           </Link>
         </div>
       </div>
@@ -261,6 +286,38 @@ export default function JobApplicationForm({ job }) {
             Selected: <span className="font-medium text-zinc-700">{resume.name}</span>
           </p>
         ) : null}
+      </FormSection>
+
+      <FormSection
+        title="Tracking account"
+        description="Create a password to sign in and track your application status anytime."
+      >
+        <div className="grid md:grid-cols-2 gap-5">
+          <Field label="Password" required hint="Minimum 8 characters">
+            <input
+              required
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Create a password"
+              minLength={8}
+              className={inputClass}
+            />
+          </Field>
+          <Field label="Confirm password" required>
+            <input
+              required
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              placeholder="Re-enter password"
+              minLength={8}
+              className={inputClass}
+            />
+          </Field>
+        </div>
       </FormSection>
 
       <FormSection

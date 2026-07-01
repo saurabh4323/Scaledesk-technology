@@ -40,10 +40,16 @@ export default function OpportunitiesPageContent() {
             >
               Find your next role
             </h1>
-            <p className="text-zinc-600 leading-relaxed max-w-md">
+            <p className="text-zinc-600 leading-relaxed max-w-md mb-6">
               Full-time engineering roles and internships across product engineering, AI,
               design, and business operations.
             </p>
+            <Link
+              href="/careers/track"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#2F80FF] hover:underline"
+            >
+              Already applied? Track your application →
+            </Link>
           </div>
           <div className="relative min-h-[280px] lg:min-h-full">
             <Image
