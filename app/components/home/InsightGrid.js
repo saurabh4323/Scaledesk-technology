@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ImageOverlayCard, SplitCard } from "./PremiumCard";
 import { ParallaxContent } from "../Parallax";
 
@@ -9,28 +10,28 @@ const INSIGHTS = [
     label: "Perspective",
     title: "From MVP validation to enterprise-grade product engineering",
     image: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&auto=format&fit=crop",
-    href: "/services/software-engineering",
+    href: "/insights/mvp-to-enterprise-product-engineering",
   },
   {
     type: "overlay",
     label: "Research Report",
     title: "AI agents and intelligent automation for modern product teams",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop",
-    href: "/services/ai-automation",
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop",
+    href: "/insights/ai-agents-modern-product-teams",
   },
   {
     type: "split",
-    label: "Case Study",
-    title: "Engineering mission-critical enterprise software at scale",
+    label: "Technical Deep Dive",
+    title: "Migrating from monolith to microservices without stopping the business",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
-    href: "/case-studies/fintech-transaction-ledger",
+    href: "/insights/monolith-to-microservices-at-scale",
   },
   {
     type: "split",
     label: "Capability",
-    title: "Cloud-native architecture built for reliability and growth",
+    title: "Cloud-native architecture patterns for reliability and growth",
     image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop",
-    href: "/services/cloud-infrastructure",
+    href: "/insights/cloud-native-reliability-patterns",
   },
 ];
 
@@ -63,6 +64,16 @@ export default function InsightGrid() {
               <SplitCard key={card.title} {...card} />
             )
           )}
+        </div>
+
+        <div className="mt-12 text-center">
+          <Link
+            href="/insights"
+            className="inline-flex items-center gap-2 text-sm font-medium text-white/70 hover:text-[#2F80FF] transition-colors"
+          >
+            View all insights
+            <span aria-hidden>→</span>
+          </Link>
         </div>
       </div>
     </section>

@@ -6,42 +6,6 @@ import { ParallaxImage, ParallaxContent } from "./Parallax";
 
 const BLUE = "#2F80FF";
 
-function StarAccent() {
-  return (
-    <svg
-      className="absolute top-8 right-8 md:top-12 md:right-16 w-16 h-16 md:w-24 md:h-24 pointer-events-none"
-      viewBox="0 0 100 100"
-      fill="none"
-      aria-hidden
-    >
-      <path
-        d="M50 8 L58 38 L88 38 L64 56 L72 86 L50 68 L28 86 L36 56 L12 38 L42 38 Z"
-        stroke={BLUE}
-        strokeWidth="5"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function SquiggleAccent() {
-  return (
-    <svg
-      className="absolute left-4 md:left-12 bottom-[38%] w-20 h-28 md:w-28 md:h-36 pointer-events-none hidden sm:block"
-      viewBox="0 0 80 120"
-      fill="none"
-      aria-hidden
-    >
-      <path
-        d="M55 10 C20 10, 5 45, 35 55 C65 65, 75 90, 40 100 C15 108, 5 95, 12 78"
-        stroke={BLUE}
-        strokeWidth="6"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 function HandshakeIcon() {
   return (
     <svg
@@ -102,9 +66,6 @@ export default function Hero() {
   return (
     <>
       <section id="story-hero" className="relative bg-black overflow-hidden">
-        <StarAccent />
-        <SquiggleAccent />
-
         <ParallaxContent
           className="relative z-10 flex flex-col items-center text-center px-6 pt-20 md:pt-28 pb-14 md:pb-20"
           yRange={[20, -20]}
@@ -135,19 +96,21 @@ export default function Hero() {
           </button>
         </ParallaxContent>
 
-        <div className="relative z-10 px-4 sm:px-8 md:px-12 lg:px-16">
+        <div className="relative z-10 w-full px-3 sm:px-8 md:px-12 lg:px-16">
           <ParallaxImage
-            className="relative max-w-6xl mx-auto h-[42vh] sm:h-[48vh] md:h-[56vh] lg:h-[62vh] rounded-t-[2rem] md:rounded-t-[2.5rem]"
+            className="relative w-full max-w-6xl mx-auto aspect-[4/3] min-h-[220px] sm:aspect-[16/9] sm:min-h-0 sm:h-[48vh] md:h-[56vh] lg:h-[62vh] rounded-t-2xl md:rounded-t-[2.5rem]"
             speed={14}
             scale={1.18}
+            mobileScale={1.02}
+            mobileSpeed={4}
           >
             <Image
               src="/heroimage.png"
               alt="ScaleDesk Technology office and engineering workspace"
               fill
               priority
-              className="object-cover"
-              sizes="(max-width: 1280px) 100vw, 1152px"
+              className="object-cover object-[68%_center] sm:object-center"
+              sizes="(max-width: 640px) 100vw, (max-width: 1280px) 100vw, 1152px"
             />
           </ParallaxImage>
         </div>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScaleDesk Technology — Internship Program 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #2F80FF;
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    body {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      color: var(--black);
+      background: #fff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .page:last-child { page-break-after: auto; }
+
+    /* ── Page 1 cover ── */
+    .cover {
+      background: var(--black);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 52px 44px;
+      min-height: 297mm;
+    }
+
+    .cover-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .brand {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .brand span { color: var(--blue); }
+
+    .cover-year {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .cover-main { margin-top: 80px; }
+
+    .cover-label {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border: 1px solid rgba(47,128,255,0.35);
+      padding: 8px 14px;
+      margin-bottom: 28px;
+    }
+
+    .cover h1 {
+      font-size: 46px;
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      max-width: 520px;
+      margin-bottom: 24px;
+    }
+
+    .cover-tagline {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.62);
+      max-width: 480px;
+    }
+
+    .cover-footer {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .cover-footer dt {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 6px;
+    }
+
+    .cover-footer dd {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .cover-footer dd a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .cover-accent {
+      position: absolute;
+      right: -40px;
+      bottom: 120px;
+      width: 200px;
+      height: 200px;
+      border: 1px solid rgba(47,128,255,0.2);
+      border-radius: 50%;
+    }
+
+    /* ── Inner pages ── */
+    .inner {
+      padding: 44px 52px 48px;
+      min-height: 297mm;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+      border-bottom: 2px solid var(--black);
+    }
+
+    .page-header .brand-sm {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .page-header .brand-sm span { color: var(--blue); }
+
+    .page-num {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    p {
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: #374151;
+      margin-bottom: 14px;
+      font-weight: 400;
+    }
+
+    .lead {
+      font-size: 15px;
+      color: #1f2937;
+      font-weight: 400;
+      margin-bottom: 22px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 8px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      padding: 20px 22px;
+      background: #fafafa;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--black);
+    }
+
+    .card p {
+      font-size: 12.5px;
+      margin-bottom: 0;
+      color: #4b5563;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0 24px;
+    }
+
+    .pill {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 7px 14px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: #374151;
+    }
+
+    .pill.blue {
+      background: rgba(47,128,255,0.08);
+      border-color: rgba(47,128,255,0.25);
+      color: var(--blue);
+    }
+
+    .criteria-box {
+      background: var(--black);
+      color: var(--white);
+      padding: 28px 30px;
+      margin: 24px 0;
+    }
+
+    .criteria-box h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .criteria-list {
+      list-style: none;
+    }
+
+    .criteria-list li {
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-weight: 400;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .criteria-list li:last-child { border-bottom: none; }
+
+    .criteria-list li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .roles-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0 28px;
+    }
+
+    .role-item {
+      border-left: 3px solid var(--blue);
+      padding: 14px 16px;
+      background: #f9fafb;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .cta-band {
+      background: linear-gradient(135deg, var(--blue) 0%, #1a5fd4 100%);
+      color: var(--white);
+      padding: 28px 30px;
+      margin-top: 28px;
+    }
+
+    .cta-band h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .cta-band p {
+      color: rgba(255,255,255,0.88);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .cta-band a {
+      color: var(--white);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 36px;
+      left: 52px;
+      right: 52px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .values-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 20px 0;
+    }
+
+    .value-item {
+      text-align: center;
+      padding: 18px 12px;
+      border: 1px solid var(--border);
+    }
+
+    .value-item strong {
+      display: block;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+
+    .value-item span {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1 — COVER -->
+  <div class="page cover">
+    <div class="cover-accent"></div>
+    <div class="cover-top">
+      <div class="brand"><span>Scaledesk</span> Technology</div>
+      <div class="cover-year">2026</div>
+    </div>
+    <div class="cover-main">
+      <div class="cover-label">Internship Program</div>
+      <h1>Build products that enterprises rely on.</h1>
+      <p class="cover-tagline">
+        Join ScaleDesk Technology — a product engineering company where interns work on
+        real platforms, real client engagements, and production-grade systems from day one.
+      </p>
+    </div>
+    <dl class="cover-footer">
+      <div>
+        <dt>Apply via Email</dt>
+        <dd><a href="mailto:hr@scaledesktechnology.com">hr@scaledesktechnology.com</a></dd>
+      </div>
+      <div>
+        <dt>Website</dt>
+        <dd><a href="https://www.scaledesktechnology.com">www.scaledesktechnology.com</a></dd>
+      </div>
+    </dl>
+  </div>
+
+  <!-- PAGE 2 — ABOUT & WHAT WE DO -->
+  <div class="page inner">
+    <div class="page-header">
+      <div class="brand-sm"><span>Scaledesk</span> Technology</div>
+      <div class="page-num">02</div>
+    </div>
+
+    <p class="section-label">Who we are</p>
+    <h2>A product engineering company—not a staffing agency.</h2>
+    <p class="lead">
+      ScaleDesk Technology partners with startups, high-growth companies, and enterprises
+      to design, build, and scale digital products. We embed engineering teams that deliver
+      architecture, software, AI, and cloud platforms built to survive real production load.
+    </p>
+    <p>
+      From doorstep mechanic platforms and fintech ledgers to AI compliance pipelines and
+      enterprise SaaS scale-ups, our work spans industries where reliability, security, and
+      measurable outcomes matter. We engineer for users, for business impact, and for the long term.
+    </p>
+
+    <p class="section-label" style="margin-top: 28px;">What we do</p>
+    <h2>Engineering products. Accelerating businesses.</h2>
+    <div class="pill-list">
+      <span class="pill blue">Product Engineering</span>
+      <span class="pill blue">Enterprise Software</span>
+      <span class="pill blue">AI &amp; Automation</span>
+      <span class="pill blue">Cloud Infrastructure</span>
+      <span class="pill blue">Data Pipelines</span>
+      <span class="pill blue">Technology Consulting</span>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Client delivery</h3>
+        <p>
+          We work on active product engagements—architecture, implementation, observability,
+          and production support—for companies across retail, fintech, healthcare, SaaS, and mobility.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Own platforms</h3>
+        <p>
+          We build and operate our own products including LeadForGrow™ (AI-powered CRM),
+          AI Analytics, Revenue Protection, and ScaleDesk HRM™—platforms used by real businesses every day.
+        </p>
+      </div>
+    </div>
+
+    <div class="values-row">
+      <div class="value-item">
+        <strong>50+</strong>
+        <span>Products engineered</span>
+      </div>
+      <div class="value-item">
+        <strong>5+</strong>
+        <span>Industries served</span>
+      </div>
+      <div class="value-item">
+        <strong>Remote</strong>
+        <span>First culture</span>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 ScaleDesk Technology</span>
+      <span>www.scaledesktechnology.com</span>
+    </div>
+  </div>
+
+  <!-- PAGE 3 — INTERNSHIPS -->
+  <div class="page inner">
+    <div class="page-header">
+      <div class="brand-sm"><span>Scaledesk</span> Technology</div>
+      <div class="page-num">03</div>
+    </div>
+
+    <p class="section-label">Open positions</p>
+    <h2>Internship opportunities — 2026</h2>
+    <p class="lead">
+      We are hiring motivated interns who want hands-on exposure to product engineering,
+      modern software delivery, and the discipline of building systems that ship to production.
+      This is a learning-first program with real responsibility—not busywork.
+    </p>
+
+    <div class="roles-grid">
+      <div class="role-item">Software Engineering Intern</div>
+      <div class="role-item">Product Engineering Intern</div>
+      <div class="role-item">AI &amp; Automation Intern</div>
+      <div class="role-item">Cloud &amp; DevOps Intern</div>
+      <div class="role-item">Data Engineering Intern</div>
+      <div class="role-item">Full-Stack Development Intern</div>
+    </div>
+
+    <p>
+      Interns are placed on live projects and internal platforms under mentorship from senior
+      engineers. You will participate in standups, code reviews, documentation, and delivery
+      cycles—the same rhythms our full-time teams follow. Duration and mode (remote / hybrid)
+      will be discussed during the selection process.
+    </p>
+
+    <div class="criteria-box">
+      <h3>Eligibility criteria</h3>
+      <ul class="criteria-list">
+        <li>Currently pursuing <strong>B.Tech</strong> (any discipline) from a recognized university</li>
+        <li>Minimum <strong>65% aggregate</strong> in Class 10th (SSC / equivalent)</li>
+        <li>Minimum <strong>65% aggregate</strong> in Class 12th (HSC / equivalent)</li>
+        <li>Minimum <strong>65% CGPA / aggregate</strong> in current degree program (till latest semester)</li>
+        <li>Expected graduation year 2026, 2027, or 2028</li>
+        <li>Strong communication, ownership, and willingness to learn in a fast-paced engineering environment</li>
+        <li>Available for a minimum internship duration as communicated during onboarding</li>
+      </ul>
+    </div>
+
+    <p class="section-label" style="margin-top: 8px;">What you gain</p>
+    <div class="two-col">
+      <div class="card">
+        <h3>Real engineering exposure</h3>
+        <p>Work on production-minded codebases, client projects, and internal products—not hypothetical assignments.</p>
+      </div>
+      <div class="card">
+        <h3>Mentorship &amp; growth</h3>
+        <p>Learn from experienced engineers through pairing, reviews, and structured feedback on architecture and craft.</p>
+      </div>
+      <div class="card">
+        <h3>Certificate &amp; evaluation</h3>
+        <p>Completion certificate and performance evaluation for eligible interns based on project contribution.</p>
+      </div>
+      <div class="card">
+        <h3>Pre-placement consideration</h3>
+        <p>Outstanding performers may be considered for full-time roles at ScaleDesk Technology.</p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 ScaleDesk Technology</span>
+      <span>hr@scaledesktechnology.com</span>
+    </div>
+  </div>
+
+  <!-- PAGE 4 — APPLY -->
+  <div class="page inner">
+    <div class="page-header">
+      <div class="brand-sm"><span>Scaledesk</span> Technology</div>
+      <div class="page-num">04</div>
+    </div>
+
+    <p class="section-label">How to apply</p>
+    <h2>Send us your profile</h2>
+    <p class="lead">
+      Email your application to our HR team. We review applications on a rolling basis and
+      will reach out to shortlisted candidates for the next steps.
+    </p>
+
+    <div class="cta-band">
+      <h3>Apply now</h3>
+      <p>Email: <a href="mailto:hr@scaledesktechnology.com">hr@scaledesktechnology.com</a></p>
+      <p>Website: <a href="https://www.scaledesktechnology.com">www.scaledesktechnology.com</a></p>
+      <p style="margin-top: 14px; font-size: 12px; opacity: 0.9;">
+        Subject line: <strong>Internship Application — [Your Name] — [Preferred Track]</strong>
+      </p>
+    </div>
+
+    <p class="section-label" style="margin-top: 32px;">Include in your email</p>
+    <div class="criteria-box" style="background: #f9fafb; color: var(--black); border: 1px solid var(--border);">
+      <ul class="criteria-list">
+        <li style="color: #374151; border-color: #e5e7eb;">Updated resume (PDF format)</li>
+        <li style="color: #374151; border-color: #e5e7eb;">Brief cover note (why ScaleDesk, preferred internship track)</li>
+        <li style="color: #374151; border-color: #e5e7eb;">College name, degree, current semester, and expected graduation year</li>
+        <li style="color: #374151; border-color: #e5e7eb;">Marksheets or academic summary (10th, 12th, and latest semester)</li>
+        <li style="color: #374151; border-color: #e5e7eb;">GitHub / portfolio link (if available)</li>
+        <li style="color: #374151; border-color: #e5e7eb;">LinkedIn profile URL</li>
+      </ul>
+    </div>
+
+    <p style="margin-top: 28px;">
+      ScaleDesk Technology is an equal-opportunity employer. We welcome applications from
+      candidates who meet the eligibility criteria and demonstrate curiosity, integrity, and
+      a genuine interest in building software that matters.
+    </p>
+
+    <div style="margin-top: 40px; padding-top: 24px; border-top: 2px solid var(--black);">
+      <div class="brand" style="font-size: 18px; color: var(--black); margin-bottom: 8px;">
+        <span style="color: var(--blue);">Scaledesk</span> Technology
+      </div>
+      <p style="font-size: 12px; color: var(--muted); margin: 0;">
+        Engineering Digital Products That Move Businesses Forward.<br />
+        hr@scaledesktechnology.com · www.scaledesktechnology.com
+      </p>
+    </div>
+
+    <div class="page-footer">
+      <span>© 2026 ScaleDesk Technology. All Rights Reserved.</span>
+      <span>Internship Program 2026</span>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -33,10 +33,18 @@ export default async function CaseStudyDetailPage({ params }) {
   const related = CASE_STUDIES.filter((s) => s.slug !== slug).slice(0, 3);
 
   return (
-    <main className="bg-black min-h-screen text-white flex flex-col">
+    <main className="bg-white min-h-screen text-zinc-900 flex flex-col">
       <CaseStudyHero study={study} />
       <CaseStudyContent study={study} />
       <RelatedCaseStudies studies={related} />
+      <section className="py-16 bg-black text-center px-6">
+        <a
+          href="/contact"
+          className="inline-flex px-8 py-3.5 text-sm font-semibold text-white bg-[#2F80FF] hover:opacity-90 transition-opacity"
+        >
+          Discuss a similar project with our team →
+        </a>
+      </section>
       <Footer />
     </main>
   );

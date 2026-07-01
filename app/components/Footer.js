@@ -1,4 +1,7 @@
 import Link from "next/link";
+import FooterNewsletter from "./FooterNewsletter";
+
+const BLUE = "#2F80FF";
 
 const LINKS_LEFT = [
   { label: "About Us", href: "/about" },
@@ -18,30 +21,41 @@ const LINKS_RIGHT = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/scaledesk-technology", external: true },
 ];
 
-function FooterWordWall() {
-  const columns = ["ENGINEER", "BUILD", "SCALE", "ENGINEER", "BUILD"];
+const WORDS = [
+  { text: "ENGINEER", accent: false, offset: "pt-0" },
+  { text: "BUILD", accent: true, offset: "pt-16 xl:pt-24" },
+  { text: "SCALE", accent: false, offset: "pt-8 xl:pt-12" },
+];
 
+function FooterWordWall() {
   return (
     <div
-      className="pointer-events-none absolute right-0 top-0 bottom-0 hidden w-[48%] overflow-hidden lg:flex justify-end gap-5 xl:gap-7 pr-2 xl:pr-6"
+      className="pointer-events-none hidden lg:flex items-start justify-end gap-4 xl:gap-6"
       aria-hidden="true"
     >
-      {columns.map((word, col) => (
+      {WORDS.map((word) => (
         <div
-          key={`${word}-${col}`}
-          className="flex flex-col justify-start pt-2"
+          key={word.text}
+          className={`flex flex-col ${word.offset}`}
           style={{
             writingMode: "vertical-rl",
             transform: "rotate(180deg)",
           }}
         >
           <span
-            className="text-[clamp(3.5rem,5.5vw,5.5rem)] font-black leading-[0.82] tracking-[-0.04em] text-white whitespace-nowrap"
-            style={{
-              WebkitTextStroke: "1px rgba(255,255,255,0.15)",
-            }}
+            className={`whitespace-nowrap text-[clamp(2.75rem,4.2vw,4.5rem)] font-black leading-[0.88] tracking-[-0.03em] ${
+              word.accent ? "" : "text-white"
+            }`}
+            style={
+              word.accent
+                ? { color: BLUE }
+                : {
+                    color: "rgba(255,255,255,0.92)",
+                    WebkitTextStroke: "1px rgba(255,255,255,0.08)",
+                  }
+            }
           >
-            {word}
+            {word.text}
           </span>
         </div>
       ))}
@@ -52,55 +66,62 @@ function FooterWordWall() {
 export default function Footer() {
   return (
     <footer className="relative w-full overflow-hidden bg-black text-white">
-      <div className="relative mx-auto min-h-[520px] max-w-[1440px] px-6 py-16 xl:px-12 xl:py-20">
-        <FooterWordWall />
+      <div className="relative mx-auto max-w-[1440px] px-6 py-16 xl:px-12 xl:py-20">
+        <div className="grid gap-14 lg:grid-cols-12 lg:gap-10 xl:gap-16">
+          {/* Left — headline, links, copyright */}
+          <div className="flex flex-col lg:col-span-6 xl:col-span-7">
+            <h2 className="mb-12 max-w-xl text-[2rem] font-semibold leading-[1.15] tracking-tight md:text-[2.35rem] xl:mb-14 xl:text-[2.6rem]">
+              Engineering Digital Products That Move Businesses Forward.
+            </h2>
 
-        <div className="relative z-10 flex max-w-[58%] flex-col lg:max-w-[52%]">
-          <h2 className="mb-14 max-w-xl text-[2rem] font-semibold leading-[1.15] tracking-tight md:text-[2.35rem] xl:text-[2.6rem]">
-            Engineering Digital Products That Move Businesses Forward.
-          </h2>
-
-          <div className="mb-20 grid grid-cols-2 gap-x-10 gap-y-3 sm:gap-x-16">
-            <ul className="flex flex-col gap-3">
-              {LINKS_LEFT.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-[15px] font-normal text-white/90 transition-colors hover:text-white"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <ul className="flex flex-col gap-3">
-              {LINKS_RIGHT.map((link) => (
-                <li key={link.href}>
-                  {link.external ? (
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[15px] font-normal text-white/90 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
+            <div className="mb-16 grid grid-cols-2 gap-x-10 gap-y-3 sm:gap-x-16 xl:mb-20">
+              <ul className="flex flex-col gap-3">
+                {LINKS_LEFT.map((link) => (
+                  <li key={link.href}>
                     <Link
                       href={link.href}
                       className="text-[15px] font-normal text-white/90 transition-colors hover:text-white"
                     >
                       {link.label}
                     </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+              <ul className="flex flex-col gap-3">
+                {LINKS_RIGHT.map((link) => (
+                  <li key={link.href}>
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[15px] font-normal text-white/90 transition-colors hover:text-white"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-[15px] font-normal text-white/90 transition-colors hover:text-white"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <p className="mt-auto text-[13px] font-normal text-white/55">
+              © {new Date().getFullYear()} ScaleDesk Technology. All Rights Reserved.
+            </p>
           </div>
 
-          <p className="mt-auto text-[13px] font-normal text-white/55">
-            © {new Date().getFullYear()} ScaleDesk Technology. All Rights Reserved.
-          </p>
+          {/* Right — newsletter + word wall */}
+          <div className="flex flex-col gap-10 lg:col-span-6 xl:col-span-5 lg:pt-2">
+            <FooterNewsletter />
+            <FooterWordWall />
+          </div>
         </div>
       </div>
     </footer>

@@ -1,6 +1,65 @@
+export const CASE_INDUSTRIES = [
+  "All",
+  "Mobility & Services",
+  "Retail & Logistics",
+  "Financial Services",
+  "Healthcare",
+  "SaaS",
+  "Logistics",
+];
+
 export const CASE_STUDIES = [
   {
+    slug: "pistons-garage-doorstep-mechanic",
+    featured: true,
+    title: "Pistons Garage — Doorstep Mechanic Platform",
+    client: "Pistons Garage",
+    industry: "Mobility & Services",
+    metric: "3x",
+    metricLabel: "Daily jobs per mechanic",
+    excerpt:
+      "Built an end-to-end doorstep mechanic platform—customer booking, live dispatch, mechanic routing, and digital payments—so Pistons Garage could scale beyond phone calls and WhatsApp.",
+    image:
+      "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=1600&auto=format&fit=crop",
+    heroImage:
+      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2000&auto=format&fit=crop",
+    timeline: "5 Months",
+    teamSize: "6 Engineers",
+    services: ["Product Engineering", "Mobile Apps", "Custom Software"],
+    tags: ["React Native", "Node.js", "Real-time dispatch", "Maps API"],
+    results: [
+      { value: "3x", label: "Jobs per mechanic / day" },
+      { value: "<15 min", label: "Avg. arrival time" },
+      { value: "85%", label: "Repeat booking rate" },
+      { value: "100%", label: "Digital payment adoption" },
+    ],
+    challenge:
+      "Pistons Garage built its reputation fixing cars at customers' doorsteps—but growth was capped by chaos. Bookings came through phone calls and WhatsApp messages. Dispatchers manually matched mechanics to jobs on paper. Customers had no visibility into when a mechanic would arrive, mechanics wasted hours driving between unplanned stops, and payments were mostly cash with no service history. The founders knew doorstep service was the future of car care, but they needed a product, not more spreadsheets.",
+    approach:
+      "ScaleDesk embedded with the Pistons Garage operations team and rode along on real service calls. We mapped every step—from breakdown report to invoice—and designed around how mechanics actually work on the road, not how software teams assume they should. We shipped in phases: booking and dispatch first, then live tracking and payments, then loyalty and service reminders.",
+    solution:
+      "We delivered a full-stack doorstep mechanic platform. Customers book repairs through a mobile app or web portal—selecting service type, vehicle details, and location with instant slot confirmation. A dispatch engine assigns the nearest available mechanic based on skills, parts inventory, and live traffic. Mechanics use a dedicated app for job queues, navigation, diagnostic checklists, photo uploads, and digital invoicing. An operations dashboard gives Pistons Garage real-time visibility into active jobs, mechanic utilization, revenue, and customer feedback. SMS and push notifications keep customers updated from booking to completion.",
+    outcome:
+      "Within three months of launch, each mechanic completed three times more jobs per day. Average arrival time dropped under fifteen minutes in core service zones. Repeat bookings reached 85% as customers trusted the transparent tracking experience. Cash handling disappeared almost entirely—digital payments became the default. Pistons Garage went from a local doorstep operation to a scalable mobility service brand with the infrastructure to open new cities.",
+    technologies: [
+      "React Native",
+      "Next.js",
+      "Node.js",
+      "PostgreSQL",
+      "Redis",
+      "Google Maps API",
+      "Razorpay",
+      "Firebase",
+    ],
+    quote: {
+      text: "We used to lose jobs because we couldn't coordinate fast enough. Now customers book in seconds and our mechanics spend their day fixing cars—not chasing calls.",
+      author: "Founder",
+      company: "Pistons Garage",
+    },
+  },
+  {
     slug: "global-retail-supply-index",
+    featured: false,
     title: "Global Retail Supply Index",
     client: "Fortune 500 Retailer",
     industry: "Retail & Logistics",
@@ -237,4 +296,8 @@ export function getCaseStudy(slug) {
 
 export function getCaseStudySlugs() {
   return CASE_STUDIES.map((study) => study.slug);
+}
+
+export function getFeaturedCaseStudy() {
+  return CASE_STUDIES.find((study) => study.featured) ?? CASE_STUDIES[0];
 }

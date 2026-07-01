@@ -2,55 +2,69 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ParallaxImage, ParallaxContent } from "../Parallax";
+import { ParallaxImage } from "../Parallax";
+
+const BLUE = "#2F80FF";
 
 export default function CaseStudyHero({ study }) {
   return (
-    <section className="relative pt-28 md:pt-32">
-      <div className="relative h-[50vh] min-h-[360px] max-h-[560px] overflow-hidden">
-        <ParallaxImage className="absolute inset-0" speed={16} scale={1.18}>
-          <Image
-            src={study.heroImage}
-            alt={study.title}
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-        </ParallaxImage>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-black/60 to-black/30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent" />
+    <section className="relative min-h-[55vh] flex items-end bg-black">
+      <ParallaxImage className="absolute inset-0" speed={14} scale={1.14}>
+        <Image
+          src={study.heroImage}
+          alt={study.title}
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+      </ParallaxImage>
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/65 to-black/30" />
 
-        <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 xl:px-12 flex flex-col justify-end pb-12 md:pb-16">
-          <Link
-            href="/case-studies"
-            className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm font-medium mb-8 transition-colors w-fit"
+      <div className="relative z-10 w-full max-w-[900px] mx-auto px-6 xl:px-12 pb-14 pt-32">
+        <Link
+          href="/case-studies"
+          className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm mb-8 transition-colors"
+        >
+          ← All case studies
+        </Link>
+
+        <div className="flex flex-wrap gap-2 mb-5">
+          <span
+            className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest border"
+            style={{
+              color: BLUE,
+              backgroundColor: `${BLUE}26`,
+              borderColor: `${BLUE}40`,
+            }}
           >
-            ← All case studies
-          </Link>
+            {study.industry}
+          </span>
+          {study.services.slice(0, 2).map((service) => (
+            <span
+              key={service}
+              className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white/60 border border-white/15"
+            >
+              {service}
+            </span>
+          ))}
+        </div>
 
-          <ParallaxContent yRange={[20, -20]}>
-            <div className="flex flex-wrap gap-2 mb-5">
-              <span className="px-3 py-1.5 rounded-full bg-[#2F80FF]/15 border border-[#2F80FF]/25 text-[#2F80FF] text-[10px] font-bold uppercase tracking-widest">
-                {study.industry}
-              </span>
-              {study.services.slice(0, 2).map((service) => (
-                <span
-                  key={service}
-                  className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60 text-[10px] font-bold uppercase tracking-widest"
-                >
-                  {service}
-                </span>
-              ))}
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-white tracking-tight leading-[1.06] max-w-4xl mb-4">
-              {study.title}
-            </h1>
-            <p className="text-lg md:text-xl text-white/60 font-light max-w-2xl leading-relaxed">
-              {study.excerpt}
-            </p>
-          </ParallaxContent>
+        <h1
+          className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white leading-tight tracking-tight mb-5"
+          style={{ fontFamily: "var(--font-space-grotesk), system-ui, sans-serif" }}
+        >
+          {study.title}
+        </h1>
+        <p className="text-white/60 text-lg font-light leading-relaxed mb-6 max-w-2xl">
+          {study.excerpt}
+        </p>
+        <div className="flex flex-wrap gap-4 text-sm text-white/45">
+          <span>{study.client}</span>
+          <span>·</span>
+          <span>{study.timeline}</span>
+          <span>·</span>
+          <span>{study.teamSize}</span>
         </div>
       </div>
     </section>

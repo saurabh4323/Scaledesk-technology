@@ -7,37 +7,43 @@ const SERVICES = [
   {
     title: "Product Engineering",
     description: "Transforming ideas into scalable digital products.",
-    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1600&auto=format&fit=crop",
     href: "/services/software-engineering",
   },
   {
     title: "Enterprise Software",
     description: "Mission-critical applications built for performance, security, and long-term growth.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop",
     href: "/services/software-engineering",
   },
   {
     title: "AI Solutions",
     description: "Intelligent automation, AI agents, and workflow optimization.",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1600&auto=format&fit=crop",
     href: "/services/ai-automation",
   },
   {
     title: "Custom Software",
     description: "Tailored platforms designed around your business.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop",
     href: "/services/software-engineering",
   },
   {
     title: "Cloud & DevOps",
     description: "Cloud-native infrastructure built for reliability and scale.",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1600&auto=format&fit=crop",
     href: "/services/cloud-infrastructure",
   },
   {
     title: "Technology Consulting",
     description: "Helping organizations make better technology decisions.",
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop",
     href: "/contact",
   },
 ];

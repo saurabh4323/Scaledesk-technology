@@ -4,11 +4,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ParallaxImage } from "../Parallax";
-import {
-  CASE_STUDIES,
-  CASE_INDUSTRIES,
-  getFeaturedCaseStudy,
-} from "../../data/caseStudies";
+import { INSIGHTS, INSIGHT_CATEGORIES, getFeaturedInsight } from "../../data/insights";
 
 const BLUE = "#2F80FF";
 
@@ -24,18 +20,18 @@ function SectionLabel({ children, dark = false }) {
   );
 }
 
-function CaseStudyCard({ study, large = false }) {
+function InsightCard({ article, large = false }) {
   return (
     <Link
-      href={`/case-studies/${study.slug}`}
+      href={`/insights/${article.slug}`}
       className={`group block bg-white border border-zinc-200 hover:border-[#2F80FF]/40 transition-colors ${
         large ? "grid lg:grid-cols-2" : ""
       }`}
     >
-      <div className={`relative overflow-hidden ${large ? "min-h-[300px] lg:min-h-full" : "h-52"}`}>
+      <div className={`relative overflow-hidden ${large ? "min-h-[280px] lg:min-h-full" : "h-52"}`}>
         <Image
-          src={study.image}
-          alt={study.title}
+          src={article.image}
+          alt={article.title}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
           sizes={large ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 768px) 100vw, 33vw"}
@@ -45,11 +41,11 @@ function CaseStudyCard({ study, large = false }) {
         <div>
           <div className="flex flex-wrap items-center gap-2 mb-4">
             <span className="text-[10px] font-semibold uppercase tracking-widest text-[#2F80FF]">
-              {study.industry}
+              {article.type}
             </span>
             <span className="text-[10px] text-zinc-400">·</span>
             <span className="text-[10px] uppercase tracking-wider text-zinc-500">
-              {study.client}
+              {article.category}
             </span>
           </div>
           <h3
@@ -57,35 +53,16 @@ function CaseStudyCard({ study, large = false }) {
               large ? "text-2xl md:text-3xl mb-4" : "text-lg mb-3"
             }`}
           >
-            {study.title}
+            {article.title}
           </h3>
           <p className={`text-zinc-600 leading-relaxed font-light ${large ? "text-base" : "text-sm"}`}>
-            {study.excerpt}
+            {article.excerpt}
           </p>
-          {!large && (
-            <div className="flex flex-wrap gap-1.5 mt-4">
-              {study.tags.slice(0, 3).map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2 py-0.5 text-[10px] uppercase tracking-wider text-zinc-500 border border-zinc-200"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
         </div>
-        <div className="flex items-end justify-between mt-6 pt-5 border-t border-zinc-100">
-          <div>
-            <div className="text-xl md:text-2xl font-semibold text-[#2F80FF] tracking-tight">
-              {study.metric}
-            </div>
-            <div className="text-[10px] uppercase tracking-wider text-zinc-500 mt-0.5">
-              {study.metricLabel}
-            </div>
-          </div>
-          <span className="text-xs font-medium text-zinc-400 group-hover:text-[#2F80FF] transition-colors">
-            Read case study →
+        <div className="flex items-center justify-between mt-6 pt-5 border-t border-zinc-100 text-xs text-zinc-500">
+          <span>{article.author}</span>
+          <span>
+            {article.date} · {article.readTime}
           </span>
         </div>
       </div>
@@ -93,15 +70,15 @@ function CaseStudyCard({ study, large = false }) {
   );
 }
 
-export default function CaseStudiesListPage() {
-  const [activeIndustry, setActiveIndustry] = useState("All");
-  const featured = getFeaturedCaseStudy();
+export default function InsightsPageContent() {
+  const [activeCategory, setActiveCategory] = useState("All");
+  const featured = getFeaturedInsight();
 
   const filtered = useMemo(() => {
-    const list = CASE_STUDIES.filter((s) => !s.featured || activeIndustry !== "All");
-    if (activeIndustry === "All") return list.filter((s) => !s.featured);
-    return list.filter((s) => s.industry === activeIndustry);
-  }, [activeIndustry]);
+    const list = INSIGHTS.filter((a) => !a.featured || activeCategory !== "All");
+    if (activeCategory === "All") return list.filter((a) => !a.featured);
+    return list.filter((a) => a.category === activeCategory);
+  }, [activeCategory]);
 
   return (
     <main className="bg-white text-zinc-900">
@@ -109,8 +86,8 @@ export default function CaseStudiesListPage() {
       <section className="relative min-h-[72vh] flex items-end bg-black">
         <ParallaxImage className="absolute inset-0" speed={12} scale={1.1}>
           <Image
-            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop"
-            alt="ScaleDesk case studies"
+            src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2000&auto=format&fit=crop"
+            alt="ScaleDesk insights"
             fill
             priority
             className="object-cover"
@@ -120,59 +97,40 @@ export default function CaseStudiesListPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
 
         <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 xl:px-12 pb-16 md:pb-20 pt-32">
-          <SectionLabel dark>Case Studies</SectionLabel>
+          <SectionLabel dark>Insights</SectionLabel>
           <h1
             className="text-4xl sm:text-5xl md:text-6xl font-semibold text-white leading-[1.06] tracking-tight max-w-4xl mb-6"
             style={{ fontFamily: "var(--font-space-grotesk), system-ui, sans-serif" }}
           >
-            Engineering outcomes that move businesses forward
+            Perspectives on product engineering
           </h1>
           <p className="text-lg text-white/65 font-light max-w-2xl leading-relaxed">
-            Real product engineering across retail, fintech, healthcare, SaaS, and logistics—built
-            with the same rigor we bring to every ScaleDesk engagement.
+            Architecture decisions, AI strategy, cloud operations, and product thinking from
+            the teams building scalable systems at ScaleDesk Technology.
           </p>
         </div>
       </section>
 
-      {/* Stats strip */}
-      <section className="border-b border-zinc-200 bg-white">
-        <div className="max-w-[1440px] mx-auto px-6 xl:px-12 py-12 md:py-16 grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-          {[
-            { value: "5+", label: "Industries served" },
-            { value: "100x", label: "Max scale achieved" },
-            { value: "0", label: "Downtime migrations" },
-            { value: "99.9%", label: "Avg. accuracy / uptime" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <div className="text-2xl md:text-3xl font-semibold tracking-tight text-zinc-900">
-                {stat.value}
-              </div>
-              <div className="text-sm text-zinc-500 mt-1">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Industry filter */}
+      {/* Topics strip */}
       <section className="border-b border-zinc-200 bg-white">
         <div className="max-w-[1440px] mx-auto px-6 xl:px-12 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <p className="text-sm text-zinc-500 max-w-md">
-            Filter by industry or explore measured outcomes from recent engagements.
+            Filter by topic or explore our latest thinking on engineering products at scale.
           </p>
           <div className="flex flex-wrap gap-2">
-            {CASE_INDUSTRIES.map((industry) => (
+            {INSIGHT_CATEGORIES.map((cat) => (
               <button
-                key={industry}
+                key={cat}
                 type="button"
-                onClick={() => setActiveIndustry(industry)}
+                onClick={() => setActiveCategory(cat)}
                 className={`px-4 py-2 text-sm font-medium transition-colors ${
-                  activeIndustry === industry
+                  activeCategory === cat
                     ? "text-white"
                     : "text-zinc-600 border border-zinc-200 hover:border-zinc-400"
                 }`}
-                style={activeIndustry === industry ? { backgroundColor: BLUE } : undefined}
+                style={activeCategory === cat ? { backgroundColor: BLUE } : undefined}
               >
-                {industry}
+                {cat}
               </button>
             ))}
           </div>
@@ -180,38 +138,38 @@ export default function CaseStudiesListPage() {
       </section>
 
       {/* Featured */}
-      {(activeIndustry === "All" || activeIndustry === featured.industry) && (
+      {(activeCategory === "All" || activeCategory === featured.category) && (
         <section className="py-16 md:py-20 bg-zinc-50 border-b border-zinc-200">
           <div className="max-w-[1440px] mx-auto px-6 xl:px-12">
             <SectionLabel>Featured</SectionLabel>
-            <CaseStudyCard study={featured} large />
+            <InsightCard article={featured} large />
           </div>
         </section>
       )}
 
-      {/* Grid */}
+      {/* Article grid */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-[1440px] mx-auto px-6 xl:px-12">
           <div className="flex items-end justify-between gap-6 mb-10">
             <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-zinc-900">
-              Client stories
+              Latest articles
             </h2>
-            <p className="text-sm text-zinc-500">{filtered.length} case studies</p>
+            <p className="text-sm text-zinc-500">{filtered.length} articles</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-zinc-200 border border-zinc-200">
-            {filtered.map((study) => (
-              <CaseStudyCard key={study.slug} study={study} />
+            {filtered.map((article) => (
+              <InsightCard key={article.slug} article={article} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Editorial band */}
+      {/* Editorial band - dark */}
       <section className="grid lg:grid-cols-2 bg-zinc-950 text-white">
         <div className="relative min-h-[360px]">
           <Image
-            src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1600&auto=format&fit=crop"
-            alt="Engineering delivery"
+            src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1600&auto=format&fit=crop"
+            alt="Engineering research"
             fill
             className="object-cover"
             sizes="50vw"
@@ -219,62 +177,58 @@ export default function CaseStudiesListPage() {
           <div className="absolute inset-0 bg-zinc-950/40" />
         </div>
         <div className="px-6 xl:px-16 py-16 md:py-24 flex flex-col justify-center">
-          <SectionLabel dark>How we deliver</SectionLabel>
+          <SectionLabel dark>How we publish</SectionLabel>
           <h2 className="text-3xl font-semibold tracking-tight mb-5 leading-tight">
-            Embedded teams, measurable outcomes
+            Written by practitioners, not marketers
           </h2>
           <p className="text-white/55 font-light leading-relaxed mb-6">
-            Every case study reflects real delivery—not slideware. We embed alongside your teams,
-            ship incrementally, and measure success in latency, uptime, cost, and revenue impact.
+            Every article reflects real delivery experience—architecture tradeoffs, production
+            incidents, migration lessons, and product decisions from active engagements.
           </p>
           <p className="text-white/55 font-light leading-relaxed">
-            From Strangler Fig migrations to AI compliance pipelines, our work is designed to survive
-            production traffic, regulatory scrutiny, and years of growth.
+            We share what worked, what failed, and what we would do differently. That honesty
+            is how we hold ourselves accountable to the engineering standards we recommend.
           </p>
         </div>
       </section>
 
-      {/* Industries overview */}
+      {/* Topics overview - white */}
       <section className="py-20 md:py-28 bg-white border-t border-zinc-200">
         <div className="max-w-[1440px] mx-auto px-6 xl:px-12">
-          <SectionLabel>Industries</SectionLabel>
+          <SectionLabel>Topics</SectionLabel>
           <h2 className="text-3xl font-semibold tracking-tight mb-12 text-zinc-900">
-            Where we create impact
+            What we write about
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "Mobility & Services",
-                desc: "Doorstep mechanic platforms, booking engines, dispatch, and field-service apps.",
+                title: "Product Engineering",
+                desc: "MVPs, platform evolution, and product thinking for engineering leaders.",
               },
               {
-                title: "Retail & Logistics",
-                desc: "Supply-chain platforms, inventory sync, and global API modernization.",
+                title: "Architecture",
+                desc: "Microservices, data pipelines, system design, and migration playbooks.",
               },
               {
-                title: "Financial Services",
-                desc: "High-throughput ledgers, audit trails, and compliance-ready architecture.",
+                title: "AI & Automation",
+                desc: "Production AI agents, LLM pipelines, and intelligent workflow design.",
               },
               {
-                title: "Healthcare",
-                desc: "HIPAA-aligned AI pipelines, document intelligence, and clinical workflows.",
+                title: "Cloud & DevOps",
+                desc: "Reliability, observability, SLOs, and cloud-native operations.",
               },
               {
-                title: "SaaS",
-                desc: "Multi-tenant scale-up, enterprise SSO, and platform engineering.",
+                title: "Security",
+                desc: "Zero-trust patterns, compliance, and secure delivery at scale.",
               },
               {
-                title: "Logistics",
-                desc: "Fleet intelligence, route optimization, and real-time operations hubs.",
+                title: "Case-linked research",
+                desc: "Insights grounded in outcomes from retail, fintech, healthcare, and SaaS.",
               },
-              {
-                title: "Cross-industry",
-                desc: "Cloud-native patterns, observability, and zero-downtime migrations.",
-              },
-            ].map((item) => (
-              <div key={item.title} className="border-l-2 border-[#2F80FF] pl-6">
-                <h3 className="text-lg font-semibold text-zinc-900 mb-2">{item.title}</h3>
-                <p className="text-sm text-zinc-600 leading-relaxed">{item.desc}</p>
+            ].map((topic) => (
+              <div key={topic.title} className="border-l-2 border-[#2F80FF] pl-6">
+                <h3 className="text-lg font-semibold text-zinc-900 mb-2">{topic.title}</h3>
+                <p className="text-sm text-zinc-600 leading-relaxed">{topic.desc}</p>
               </div>
             ))}
           </div>
@@ -285,8 +239,8 @@ export default function CaseStudiesListPage() {
       <section className="relative py-20 md:py-28 bg-black overflow-hidden">
         <ParallaxImage className="absolute inset-0 opacity-35" speed={8} scale={1.08}>
           <Image
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2000&auto=format&fit=crop"
-            alt="Start your project"
+            src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2000&auto=format&fit=crop"
+            alt="Join the conversation"
             fill
             className="object-cover"
             sizes="100vw"
@@ -294,24 +248,25 @@ export default function CaseStudiesListPage() {
         </ParallaxImage>
         <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight mb-5">
-            Ready to write your case study?
+            Want to go deeper?
           </h2>
           <p className="text-white/55 font-light mb-8">
-            Partner with ScaleDesk to engineer products that deliver measurable business impact.
+            Explore case studies with measured outcomes—or talk to our team about your product
+            engineering challenges.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              href="/contact"
+              href="/case-studies"
               className="inline-flex px-7 py-3.5 text-sm font-semibold text-white"
               style={{ backgroundColor: BLUE }}
             >
-              Talk to our engineers →
+              View case studies →
             </Link>
             <Link
-              href="/insights"
+              href="/contact"
               className="inline-flex px-7 py-3.5 text-sm font-semibold text-white border border-white/25 hover:border-white/50 transition-colors"
             >
-              Read our insights
+              Talk to our engineers
             </Link>
           </div>
         </div>
